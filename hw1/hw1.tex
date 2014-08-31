@@ -1,0 +1,61 @@
+\documentclass{tufte-handout}
+
+\title{Math 352: Homework 1}
+\author{Anthony Brice}
+
+\usepackage{graphicx} % allow embedded images
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+% \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath, amsthm, amssymb}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command
+                                % specification environment
+
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+
+\usepackage{natbib}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+\maketitle
+\section{Section 1.1}
+\subsection{Problem 4}
+\begin{description}
+\item \textit{In raquetball, a player continues to serve as long as
+    she is winning; a point is scored only when a player is serving
+    and wins the volley. The first player to win 21 points wins the
+    game. Assume that you serve first and have a probability .6 of
+    winning a volley when you serve and probability .5 when your
+    opponent serves. Estimate, by simulation, the probability that you
+    will win a game.}
+\end{description}  
+
+To estimate by simulation our the probability that we will win the
+game, we write the program, \textbf{Racquetball}\footnotemark. At each
+iteration, the program chooses a random number $0 < m(\omega_i) \leq
+1$. At odd iterations, if $m(\omega_i)$ is less than or equal to
+$0.6$, than our score is incremented by 1. At even iterations, if
+$m(\omega_i)$ is greater than $0.5$, then our opponents score is
+incremented. The game ends when one player reaches $21$ points and
+that player is declared the winner. We ran our program $500000$ times,
+and found that our probability of winning was about $0.8244$.
+
+\footnotetext{Source code may be found at }
+
+\end{document}
+
