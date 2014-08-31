@@ -133,7 +133,52 @@ rolling a $1$. Then
   m(\omega_1) &= \frac{1}{21}.
 \end{align*}
 Then the probability of the event of rolling an even face is
-\[\frac{2}{21} + \frac{4}{21} + \frac{6}{21} = \frac{12}{21} = \frac{4}{7}.\]
+\[\frac{2}{21} + \frac{4}{21} + \frac{6}{21} = \frac{12}{21} =
+\frac{4}{7}.\]
+
+\subsection{Problem 18}
+\begin{description}
+\item[(a)] \textit{For events $A_1,\dots, A_n$, prove that
+  \[
+  P(A_1 \cup \dots \cup A_n) \leq P(A_1) + \dots + P(A_n).
+  \]}
+\item[(b)] \textit{For events $A$ and $B$, prove that
+  \[
+  P(A \cap B) \geq P(A) + P(B) - 1.
+  \]}
+\end{description}
+
+\begin{description}
+\item[\emph{(a)}]
+  \[
+  P(A_1 \cup \dots \cup A_n) \leq P(A_1) + \dots + P(A_n).
+  \]
+
+  \begin{proof} This is a corollary of Theorem $3.8$ which states ``to
+    find the probability that at least one of $n$ events $A_i$ occurs,
+    first add the probability of each event, then subtract the
+    probabilities of all two-way intersections, add the probability of
+    all three way intersections, and so forth.'' Clearly by adding all
+    probabilities, subtracting some intersections, and adding back
+    only probabilities of intersections that must be less than those
+    already subtracted, the probability of the unions must be less
+    than or equal to the sum
+    of the probability of the unions.\\
+  \end{proof}
+
+\item[\emph{(b)}] 
+  \[P(A \cap B) \geq P(A) + P(B) - 1.\]
+
+  \begin{proof}
+    We begin with this statement proved in Theorem $1.4$:
+    \[P(A \cup B) = P(A) + P(B) - P(A \cap B).\]
+    Through substitution and the fact that $P(A \cup B) \leq 1$, we
+    have that
+    \[1 \geq P(A) + P(B) - P(A \cap B).\]
+    We simply rearrange our terms and
+    \[P(A \cap B) \geq P(A) + P(B) - 1.\]
+  \end{proof}
+\end{description}
 
 \subsection{Problem 31}
 \begin{description}
