@@ -46,16 +46,38 @@
     will win a game.}
 \end{description}  
 
-To estimate by simulation our the probability that we will win the
-game, we wrote the program, \textbf{Racquetball}\footnote{Source code
-  may be found at
-  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/racquetball.c}.}. At
-each iteration, the program chooses a random number $m(\omega_i)$ in $(0,1]$. At odd iterations, if $m(\omega_i)$ is less than or equal to
-$0.6$, than our score is incremented by $1$. At even iterations, if
-$m(\omega_i)$ is greater than $0.5$, then our opponent's score is
-incremented by $1$. The game ends when one player reaches $21$ points and
-that player is declared the winner. We ran our program $500000$ times,
-and found that our probability of winning was about $0.8263$.
+To estimate by simulation the probability that we will win the game,
+we wrote the program \textbf{Racquetball}\footnote{Source code may be
+  found at
+  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/racquetball.c}.}.
+At each iteration, the program chooses a random number $m(\omega_i)$
+in $(0,1]$. From $m(\omega_i)$, the program calculates if the server
+won that volley. If so, the server's score is incremented and she
+continues to serve. If not, the other player serves. The game ends
+when one player reaches $21$ points and that player is declared the
+winner. We ran our program $500000$ times, and found that our
+probability of winning was about $0.8263$.
 
+\subsection{Problem 5}
+\begin{description}
+\item \textit{The \textit{Labouchere system} for roulette is played as
+    follows. Write down a list of numbers, usually $1$, $2$, $3$,
+    $4$. Bet the sum of the first and last, $1+4 = 5$, on red. If you
+    win, delete the first and last numbers from your list. If you
+    lose, add the amount that you last bet to the end of your
+    list. Then use the new list and bet the sum of the first and last
+    numbers (if there is only one number, bet that amount). Continue
+    until your list becomes empty. Show that, if this happens, you win
+    the sum, $1+2+3+4 = 10$, of your original list. Simulate this
+    system and see if you do always stop and, hence, always win. If
+    so, why is this not a foolproof gambling system?}
+\end{description}
+
+To show that we always win the sum of our list, consider that at any
+given moment in the game the sum of the list and our winnings is
+always the initial sum of the list. Consider the case when we lose a
+round; the debit from our winnings is added to the list. Consider the
+case when we win; the credit to our winnings is removed from the
+list. Thus we always win the initial sum of the list.
 \end{document}
 
