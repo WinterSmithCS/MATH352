@@ -1,7 +1,7 @@
 -- file: Martingale.hs
 -- a program to simulate the martingale doubling system
 
-import System.Random (randomRIO, StdGen)
+import System.Random (randomRIO)
 import System.IO.Unsafe (unsafePerformIO)
 import System.Environment (getArgs)
 
