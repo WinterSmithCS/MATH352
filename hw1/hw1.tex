@@ -25,11 +25,14 @@
 \newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command
                                 % specification environment
 
-\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}} % Macro for scientific notation
 
+% Use fancy symbols for footnotes
 \usepackage{hyperref}
 \usepackage{natbib}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{perpage}
+\MakePerPage{footnote}
 
 \begin{document}
 
@@ -48,7 +51,7 @@
 
 To estimate by simulation the probability that we will win the game,
 we wrote the program \textbf{Racquetball}\footnote{
-  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/racquetball.c}.}.
+  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/racquetball.c}}.
 At each iteration, the program chooses a random number $m(\omega_i)$
 in $(0,1]$. From $m(\omega_i)$, the program calculates if the server
 won that volley. If so, the server's score is incremented and she
@@ -79,7 +82,7 @@ round; the debit from our winnings is added to the list. Consider the
 case when we win; the credit to our winnings is removed from the
 list. Thus we always win the initial sum of the list.
 
-I simulated the system with the program \textbf{Labouchere}\footnote{
+We simulated the system with the program \textbf{Labouchere}\footnote{
   \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/Labouchere.hs}}.
 Of course, play always does stop. This is not a foolproof gambling system
 because the limit on the sum of the list extends to infinity as play
@@ -94,12 +97,89 @@ money to ensure she plays each game until her list is empty.
     you lose, double your previous bet. Suppose that you use this
     system until you have won at least $5$ dollars or you have lost
     more than $100$ dollars. Write a program to simulate this and play
-    it a number of times and see how you do. In the book \textrm{The
+    it a number of times and see how you do. In the book \emph{The
       Newcomes}, W. M. Thackeray remarks ``You have not played as yet?
     Do not do so; above all avoid a martingale if you do.'' Was this
     good advice?}
 \end{description}
 
+We wrote a program \textbf{Martingale}\footnote{
+  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/Martingale.hs}}
+to simulate the game. Running it for $100000$ iterations found that we
+could satisfy the conditions with a $0.94629$ probability. However,
+one can clearly see that the conditions are stacked in such a way to
+allow this. The betting system favors small gains, so reaching 5
+dollars is a fairly trivial task. Conversely winning large amounts is
+very difficult since as with any typical gambling game, the odds are
+against the player and will become apparent over many repeated
+rounds. Thackeray's advice is sound.
 
+\section{Section 1.2}
+\subsection{Problem 6}
+\begin{description}
+\item \textit{A die is loaded in such a way that the probability of
+    each face turning up is proportional to the number of dots on that
+    face. (For example, a six is three times as likely as a two.) What
+    is the probability of getting an even number in one throw?}
+\end{description}
+
+To calculate the probability of an even number in one throw, we must
+know the probability of each face. Let $m(\omega_1)$ be the probability of
+rolling a $1$. Then 
+\begin{align*}
+  P(\Omega) &= m(\omega_1) + 2m(\omega_1) + 3m(\omega_1) + 4m(\omega_1) +
+  5m(\omega_1) + 6m(\omega_1)\\
+  1 &= 21m(\omega_1)\\
+  m(\omega_1) &= \frac{1}{21}.
+\end{align*}
+Then the probability of the event of rolling an even face is
+\[\frac{2}{21} + \frac{4}{21} + \frac{6}{21} = \frac{12}{21} = \frac{4}{7}.\]
+
+\subsection{Problem 31}
+\begin{description}
+\item \textit{A reader of Marilyn vos Savant's column wrote in with
+    the following question: \quote{My dad heard this story on the
+      radio. At Duke University, two students had received A's in
+      chemistry all semester. But on the night before the final exam,
+      they were partying in another state and didn't get back to Duke
+      until it was over. Their excuse to the professor was that they
+      had a flat tire, and they asked if they could take a make-up
+      test. The professor agreed, wrote out a test and sent the two to
+      separate rooms to take it. The first question (on one side of
+      the paper) was worth $5$ points, and they answered it
+      easily. Then they flipped the paper over and found the second
+      question, worth $95$ points: `Which tire was it?' What was the
+      probability that both students would say the same thing? My dad
+      and I think it's $1$ in $16$. Is that right?}}
+\item[(a)] \textit{Is the answer $1/16$?}
+\item[(b)] \textit{The following question was asked of a class of
+    students. ``I was driving to school today, and one of my tires
+    went flat. Which tire do you think it was?'' The responses were as
+    follows: right front, $58\%$, left front, $11\%$, right rear,
+    $18\%$, left rear, $13\%$. Suppose that this distribution holds in
+    the general population. What is the probability that they will
+    give the same answer to the second question?}
+\end{description}
+
+\begin{description}
+\item[\emph{(a)}] The answer is indeed $1/16$. Let $1$ be the right front
+  tire, $2$ be left front, $3$ right rear, and $4$ left rear. We take as sample space
+  $\Omega = \{ (i,j) : 1 \leq i,j \leq 4\}$. To determine the size of
+  $\Omega$, we note that there are four choices for $i$, and for each
+  choice of $i$, there are four choices for $j$, leading to $16$
+  different outcomes.
+\item[\emph{(b)}] Our sample space $E =
+  \{(1,1),(2,2),(3,3),(4,4)\}$. We can easily calculate the
+  probability of each outcome in our sample space:
+  \begin{align*}
+    P(m(1,1)) &= P(1) \cdot P(1) = .58 \cdot .58 = .3364\\
+    P(m(2,2)) &= .11 \cdot .11 = .0121\\
+    P(m(3,3)) &= .18 \cdot .18 = .0324\\
+    P(m(4,4)) &= .13 \cdot .13 = .0169.
+  \end{align*}
+  Then the sum of all outcomes in $E$ is the probability that the
+  students will pick the same tire. Thus
+  \[\sum_{\omega \in E} = P(E) = .3978.\]
+\end{description}
 
 \end{document}
