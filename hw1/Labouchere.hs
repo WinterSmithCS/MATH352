@@ -3,7 +3,6 @@
 
 import System.Random (randomRIO)
 import System.IO.Unsafe (unsafePerformIO)
-import System.Environment (getArgs)
 
 pick :: [a] -> IO a
 pick xs = randomRIO (0, length xs - 1) >>= return . (xs !!)

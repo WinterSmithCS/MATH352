@@ -47,8 +47,7 @@
 \end{description}  
 
 To estimate by simulation the probability that we will win the game,
-we wrote the program \textbf{Racquetball}\footnote{Source code may be
-  found at
+we wrote the program \textbf{Racquetball}\footnote{
   \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/racquetball.c}.}.
 At each iteration, the program chooses a random number $m(\omega_i)$
 in $(0,1]$. From $m(\omega_i)$, the program calculates if the server
@@ -58,7 +57,7 @@ when one player reaches $21$ points and that player is declared the
 winner. We ran our program $500000$ times, and found that our
 probability of winning was about $0.8263$.
 
-\subsection{Problem 5}
+\subsection{Problem 9}
 \begin{description}
 \item \textit{The \textit{Labouchere system} for roulette is played as
     follows. Write down a list of numbers, usually $1$, $2$, $3$,
@@ -79,5 +78,28 @@ always the initial sum of the list. Consider the case when we lose a
 round; the debit from our winnings is added to the list. Consider the
 case when we win; the credit to our winnings is removed from the
 list. Thus we always win the initial sum of the list.
-\end{document}
 
+I simulated the system with the program \textbf{Labouchere}\footnote{
+  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/Labouchere.hs}}.
+Of course, play always does stop. This is not a foolproof gambling system
+because the limit on the sum of the list extends to infinity as play
+continues. Thus the player would need a nearly infinite amount of
+money to ensure she plays each game until her list is empty.
+
+\subsection{Problem 10}
+\begin{description}
+\item \textit{Another well-known gambling system is the martingale
+    doubling system. Suppose that you are betting on red to turn up in
+    roulette. Every time you win, bet $1$ dollar next time. Every time
+    you lose, double your previous bet. Suppose that you use this
+    system until you have won at least $5$ dollars or you have lost
+    more than $100$ dollars. Write a program to simulate this and play
+    it a number of times and see how you do. In the book \textrm{The
+      Newcomes}, W. M. Thackeray remarks ``You have not played as yet?
+    Do not do so; above all avoid a martingale if you do.'' Was this
+    good advice?}
+\end{description}
+
+
+
+\end{document}
