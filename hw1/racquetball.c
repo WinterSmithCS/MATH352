@@ -2,6 +2,8 @@
 // player has a chance of winning her volley 0.6, and a chance of
 // winning the opponent's volley 0.5
 
+// compiled with gcc racquetball.c -o Racquetball -std=gnu99 -Wall
+
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
