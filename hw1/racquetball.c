@@ -9,26 +9,38 @@
 #define TRUE (1==1)
 #define FALSE (!TRUE)
 
+enum {PLAYER1, PLAYER2};
+
+#define P1_VOLLEY_CHANCE (0.6)
+#define P2_VOLLEY_CHANCE (0.5)
+
 double random_0_to_1() {
     return (double) rand() / (double) RAND_MAX;
 }
 
+int volley(double chance) {
+    return random_0_to_1() < chance;
+}
+
 int racquetball() {
-    unsigned int player1 = 0;
-    unsigned int player2 = 0;
+    int score[2];
+    score[PLAYER1] = 0;
+    score[PLAYER2] = 0;
+
+    int player1_serve = TRUE;
 
     do {
-        if (random_0_to_1() < 0.6)
-            player1++;
-        
-        if (player1 == 21)
-            break;
+        if (player1_serve) {
+            while (volley(P1_VOLLEY_CHANCE) && score[PLAYER1] < 21)
+                score[PLAYER1]++;
+        } else {
+            while(volley(P2_VOLLEY_CHANCE) && score[PLAYER2] < 21)
+                score[PLAYER2]++;
+        }
+        player1_serve = !player1_serve;
+    } while (score[PLAYER1] < 21 && score[PLAYER2] < 21);
 
-        if (random_0_to_1() > 0.5)
-            player2++;
-    } while (player1 < 21 && player2 < 21);
-
-    return player1 == 21;
+    return score[PLAYER1] == 21;
 }
 
 int main(int argc, const char* argv[]) {

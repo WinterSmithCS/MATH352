@@ -37,26 +37,25 @@
 \section{Section 1.1}
 \subsection{Problem 4}
 \begin{description}
-\item \textit{In raquetball, a player continues to serve as long as
+\item \textit{In racquetball, a player continues to serve as long as
     she is winning; a point is scored only when a player is serving
-    and wins the volley. The first player to win 21 points wins the
-    game. Assume that you serve first and have a probability .6 of
-    winning a volley when you serve and probability .5 when your
+    and wins the volley. The first player to win $21$ points wins the
+    game. Assume that you serve first and have a probability $.6$ of
+    winning a volley when you serve and probability $.5$ when your
     opponent serves. Estimate, by simulation, the probability that you
     will win a game.}
 \end{description}  
 
 To estimate by simulation our the probability that we will win the
-game, we write the program, \textbf{Racquetball}\footnote{Source code
+game, we wrote the program, \textbf{Racquetball}\footnote{Source code
   may be found at
   \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/racquetball.c}.}. At
-each iteration, the program chooses a random number $0 < m(\omega_i)
-\leq 1$. At odd iterations, if $m(\omega_i)$ is less than or equal to
-$0.6$, than our score is incremented by 1. At even iterations, if
-$m(\omega_i)$ is greater than $0.5$, then our opponents score is
-incremented. The game ends when one player reaches $21$ points and
+each iteration, the program chooses a random number $m(\omega_i)$ in $(0,1]$. At odd iterations, if $m(\omega_i)$ is less than or equal to
+$0.6$, than our score is incremented by $1$. At even iterations, if
+$m(\omega_i)$ is greater than $0.5$, then our opponent's score is
+incremented by $1$. The game ends when one player reaches $21$ points and
 that player is declared the winner. We ran our program $500000$ times,
-and found that our probability of winning was about $0.8244$.
+and found that our probability of winning was about $0.8263$.
 
 \end{document}
 
