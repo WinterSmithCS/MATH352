@@ -30,13 +30,11 @@ int racquetball() {
     int player1_serve = TRUE;
 
     do {
-        if (player1_serve) {
-            while (volley(P1_VOLLEY_CHANCE) && score[PLAYER1] < 21)
-                score[PLAYER1]++;
-        } else {
-            while (volley(P2_VOLLEY_CHANCE) && score[PLAYER2] < 21)
-                score[PLAYER2]++;
-        }
+        if (player1_serve)
+            while (volley(P1_VOLLEY_CHANCE) && ++score[PLAYER1] < 21);
+        else
+            while (volley(P2_VOLLEY_CHANCE) && ++score[PLAYER2] < 21);
+       
         player1_serve = !player1_serve;
     } while (score[PLAYER1] < 21 && score[PLAYER2] < 21);
 
