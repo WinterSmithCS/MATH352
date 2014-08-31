@@ -28,10 +28,7 @@ int racquetball() {
             player2++;
     } while (player1 < 21 && player2 < 21);
 
-    if (player1 == 21)
-        return TRUE;
-    else // player2 == 21
-        return FALSE;
+    return player1 == 21;
 }
 
 int main(int argc, const char* argv[]) {
@@ -41,11 +38,11 @@ int main(int argc, const char* argv[]) {
     }
 
     srand(time(NULL));
-    long long num_tests = atoll(argv[1]);
+    unsigned long long num_tests = atoll(argv[1]);
 
-    long long player1_wins = 0;
+    unsigned long long player1_wins = 0;
 
-    for (long long i = 0; i < num_tests; i++)
+    for (unsigned long long i = 0; i < num_tests; i++)
         if (racquetball())
             player1_wins++;
 

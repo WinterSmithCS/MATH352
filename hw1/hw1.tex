@@ -27,6 +27,7 @@
 
 \newcommand{\e}[1]{\ensuremath{\times 10^{#1}}}
 
+\usepackage{hyperref}
 \usepackage{natbib}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
@@ -46,16 +47,16 @@
 \end{description}  
 
 To estimate by simulation our the probability that we will win the
-game, we write the program, \textbf{Racquetball}\footnotemark. At each
-iteration, the program chooses a random number $0 < m(\omega_i) \leq
-1$. At odd iterations, if $m(\omega_i)$ is less than or equal to
+game, we write the program, \textbf{Racquetball}\footnote{Source code
+  may be found at
+  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/racquetball.c}.}. At
+each iteration, the program chooses a random number $0 < m(\omega_i)
+\leq 1$. At odd iterations, if $m(\omega_i)$ is less than or equal to
 $0.6$, than our score is incremented by 1. At even iterations, if
 $m(\omega_i)$ is greater than $0.5$, then our opponents score is
 incremented. The game ends when one player reaches $21$ points and
 that player is declared the winner. We ran our program $500000$ times,
 and found that our probability of winning was about $0.8244$.
-
-\footnotetext{Source code may be found at }
 
 \end{document}
 
