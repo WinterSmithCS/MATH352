@@ -11,13 +11,13 @@ labouchere xs = do
 labouchere' :: Num a => [a] -> a -> StdGen -> IO a
 labouchere' [] acc gen = return acc
 labouchere' (x:[]) acc gen = do
-  let (randNumber, newGen) = randomR (1,37) gen :: (Int, StdGen)
-  if roulette!!randNumber `elem` red
+  let (randNumber, newGen) = randomR (0,37) gen :: (Int, StdGen)
+  if randNumber `elem` red
     then return $ acc + x
     else labouchere' (x:[x]) (acc - x) newGen
 labouchere' (x:xs) acc gen = do
-  let (randNumber, newGen) = randomR (1,37) gen :: (Int, StdGen)
-  if roulette!!randNumber `elem` red
+  let (randNumber, newGen) = randomR (0,37) gen :: (Int, StdGen)
+  if randNumber `elem` red
     then labouchere' (init xs) (acc + x + last xs) newGen
     else labouchere' ((x:xs) ++ [x + last xs]) (acc - x - last xs) newGen
 
