@@ -14,11 +14,11 @@ martingale' :: Real a => a -> a -> StdGen -> Bool
 martingale' bet acc gen
   | acc >= 5     = True
   | acc <= -100  = False
-  | otherwise    = do
+  | otherwise    = 
     let (randNumber, newGen) = randomR (0,37) gen :: (Int, StdGen)
-    if randNumber `elem` red
-      then martingale' 1 (acc + bet) newGen
-      else martingale' (bet * 2) (acc - bet) newGen
+    in if randNumber `elem` red
+       then martingale' 1 (acc + bet) newGen
+       else martingale' (bet * 2) (acc - bet) newGen
 
 main :: IO ()
 main = do
