@@ -32,7 +32,7 @@ main :: IO ()
 main = do
   args <- getArgs
   let iters = read $ head args
-      list = read $ args!!1
+      list = read $ args!!1 :: [Double]
   gens <- replicateM iters newStdGen
   let results = map (labouchere list) gens
   print $
