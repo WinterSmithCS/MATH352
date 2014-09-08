@@ -1,0 +1,259 @@
+\documentclass{tufte-handout}
+
+\title{Math 352: Homework 2}
+\author{Anthony Brice}
+
+\usepackage{graphicx} % allow embedded images
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+% \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath, amsthm, amssymb}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim
+                              % environments
+
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+
+\usepackage[scaled]{berasans}
+\usepackage[T1]{fontenc}
+\usepackage{listings,xcolor}
+%\lstloadlanguages{[5.2]Mathematica}
+\lstset{language=Mathematica}
+
+\lstset{basicstyle={\sffamily\footnotesize},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt,
+  breaklines=true,
+  captionpos={t},
+  frame={lines},
+  rulecolor=\color{black},
+  framerule=0.5pt,
+  columns=flexible,
+  tabsize=2
+}
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command
+                                % specification environment
+
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}} % Macro for scientific
+                                % notation
+
+% Use fancy symbols for footnotes
+\usepackage{hyperref}
+\usepackage{natbib}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{perpage}
+\MakePerPage{footnote}
+
+\begin{document}
+
+\maketitle
+\section{Section 2.1}
+\subsection{Exercise 3}
+\begin{description}
+\item \textit{Alter the program \textbf{MonteCarlo} to estimate the
+    area of the circle of radius $1/2$ with center at $(1/2,1/2)$
+    inside the unit square by choosing $1000$ points at random. Compare
+    your results with the true value of $\pi/4$. Use your results to
+    estimate the value of $\pi$. How accurate is your estimate?}
+\end{description}
+
+My modified
+program\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw2/hw2.nb}}
+estimated the area to be $.778$. This is about $1/100$ off from
+$\pi/4$. Estimating the value $\pi$, \[\pi \approx 4(.778) = 3.112
+\,.\]
+This puts us about $4/100$ off of the true value of $\pi$.
+
+\subsection{Exercise 4}
+\begin{description}
+\item \textit{Alter the program \textbf{MonteCarlo} to estimate the
+    area under the graph of $y = \sin{\pi x}$ inside the unit square by
+    choosing $10,000$ points at random. Now calculate the true value
+    of this area and use your simulation results to estimate the value
+    of $\pi$. How accurate is your estimate?}
+\end{description}
+
+My modified program estimated the area to be $.6333$. For the actual area,
+let $u = \pi x$, then $du = \pi \; dx$, then
+\begin{align*}
+  \int_0^1 \sin \pi x \; dx & = \frac{1}{\pi} \int_0^\pi
+  \sin(u) \; du \\
+  &= \left[ - \frac{\cos u}{\pi} \right]_0^\pi \\
+  &= \left[ - \frac{\cos \pi x}{\pi} \right]_0^1 \\
+  &= \frac{2}{\pi} \, .
+\end{align*}
+
+To approximate pi,
+\begin{align*}
+  \frac{2}{\pi} & \approx .6333 \\
+  \frac{\pi}{2} & \approx 1.57903 \\
+  \pi & \approx 3.15806 \, .
+\end{align*}
+My estimate is about $2/100$ off.
+
+\subsection{Exercise 5}
+\begin{description}
+\item \textit{Alter the program \textbf{MonteCarlo} to estimate the
+    area under the graph of $y = 1/(x+1)$ in the unit square in the
+    same way as Exercise~4. Calculate the true value of this area and
+    use your simulation results to estimate the value of
+    $\log{2}$. How accurate is your estimate?}
+\end{description}
+
+My altered program estimated the area to be $.693$. For the true area,
+let $u = x + 1$, then $du = dx$, then
+\begin{align*}
+ \int_0^1 \frac{1}{x+1} \; dx &= \int_1^2 \frac{1}{u} \;
+ du \\
+ &= \left[ \log{u} \right]_1^2 \\
+ &= \log{2} \, .
+\end{align*}
+Since $\log{2} \approx .69315$, my estimate is pretty good.
+
+\subsection{Exercise 9}
+\begin{description}
+\item \textit{A large number of waiting time problems have an
+    exponential distribution of outcomes. We shall see (in
+    Section~5.2) that such outcomes are simulated by computing
+    $(-1/\lambda)\log{(\mathrm{rnd})}$, where $\lambda > 0$. For
+    waiting times produced in this way, the average waiting time is
+    $1/\lambda$. For example, the times spent waiting for a car to
+    pass on a highway, or the times between emissions of particles
+    from a radioactive source, are simulated by a sequence of random
+    numbers, each of which is chosen by computing
+    $(-1/\lambda)\log{(\mathrm{rnd})}$, where $1/\lambda$ is the
+    average time between cars or emissions. Write a program to
+    simulate the times between cars when the average time between cars
+    is $30$ seconds. Have your program compute an area bar graph for
+    these times by breaking the time interval from $0$ to $120$ into
+    $24$ subintervals. On the same pair of axes, plot the function
+    $f(x) = (1/30)e^{-(1/30)x}.$ Does the function fit the bar graph
+    well?}
+\end{description}
+
+We wrote the function \lstinline$AvgWait$,
+
+\begin{lstlisting}
+AvgWait[n_, avgTime_] :=
+ Block[
+  {randtime,
+   timelist = {}
+   },
+  For[i = 0, i < n, i++,
+   randtime = -avgTime Log[RandomReal[{0, 1}]];
+   timelist = Append[timelist, randtime];
+   ];
+  Histogram[Select[timelist, 0 <= # <= 120 &], 24]
+    Plot[(1/30) Exp[-(1/30) x], {x, 0, 120}]
+  ]
+\end{lstlisting}
+We chose to show two a histogram and a plot of the exponential
+function side-by-side because it appears the \lstinline$Areabargraph$
+function provided by the author is deprecated and fixing it is beyond
+me. The output of \lstinline$AvgWait[10000,30]$ is given in Figures
+\ref{fig:barchart} and \ref{fig:exp}.
+
+Since the figures are scaled similarly, one can see that the function
+is a very good fit for the graph.
+
+\begin{marginfigure}
+  \centering
+  \includegraphics{barchart}
+  \caption{The histogram}
+  \label{fig:barchart}
+\end{marginfigure}
+
+\begin{marginfigure}
+  \includegraphics{exp}
+  \caption{The plot of the exponential function}
+  \label{fig:exp}
+\end{marginfigure}
+
+\section{Section 2.2}
+\subsection{Exercise 6}
+\begin{description}
+\item \emph{Assume that a new light bulb will burn out after $t$
+    hours, where $t$ is chosen from $[0,\infty)$ with an exponential
+    density \[ f(t) = \lambda e^{-\lambda t} \, \]
+    In this context, $\lambda$ is often called the \emph{failure
+      rate} of the bulb.}
+  \begin{description}
+  \item [(a)] \emph{Assume that $\lambda = 0.01$, and find the probability
+    that the bulb will \emph{not} burn out before $T$ hours. This
+    probability is often called the \emph{reliability} of the bulb.}
+  \item [(b)] \emph{For what $T$ is the reliability of the bulb $= 1/2$?}
+  \end{description}
+\end{description}
+
+\begin{description}
+\item [(a)] To find the probability that the bulb will not burn out
+  before $T$ hours, we need to find $F_T(x)$, the cumulative distribution
+  function of $f(t)$. By Theorem $2.1$,
+  \begin{align*}
+    F_T(x) = \int_{0}^x \! f(t) \, dt &= \int_{0}^x \!
+    0.01 e^{-0.01 t} \, dt \\
+    &= \left[ -e^{-0.01t} \right]_0^x \\
+    &= 1 - e^{-0.01x} \, .
+  \end{align*}
+  Then the probability that the bulb will not burn out before $T$
+  hours is $1-e^{-0.01T}$.
+\item [(b)] We need to find $T$ such that $F_T(x) = 1/2$. Then
+  \begin{align*}
+    \frac{1}{2} &= 1 - e^{-0.01T} \\z
+    \frac{1}{2} &= e^{-0.01T} \\
+    \log{\frac{1}{2}} &= -0.01T \\
+    T &= -\frac{\log{\frac{1}{2}}}{0.01} \\
+    &= 69.3147 \, .
+  \end{align*}
+\end{description}
+
+\subsection{Exercise 12}
+\begin{description}
+\item \emph{Take a stick of unit length and break it into three
+    pieces, choosing the break points at random. (The break points are
+    assumed to be chosen simultaneously.) What is the probability that
+    the three pieces can be used to form a triangle? \emph{Hint}: The
+    sum of the lengths of any two pieces must exceed the length of the
+    third, so each piece must have length $< 1/2$. Now use Exercise $8$(g).}
+\end{description}
+
+\begin{marginfigure}
+  \includegraphics{prob}
+  \caption{The region our conditions allow}
+  \label{fig:prob}
+\end{marginfigure}
+
+Let $X$ and $Y$ be our break points. Our pieces form a triangle if no
+piece is longer than any other. Thus, if $0<X<Y<1$, then the lengths
+of our line segments are $X$, $Y-X$, and $1-Y$. Then they must satisfy
+the conditions
+\begin{align*}
+  X &< 1 - X \\
+  Y &> 1 - Y \\
+  Y &< X + \frac{1}{2} \, .
+\end{align*}
+Since our sample space is the unit square, we can calculate the area
+of the region that our inequalities allow. (See
+Figure~\ref{fig:prob}.) Considering the cases in which $X<Y$ and
+$Y>X$, we find that the area and thus the probability comes out to
+$1/4$.
+
+\end{document}
+
+%  LocalWords:  vos
+
+
