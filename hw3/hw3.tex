@@ -1,0 +1,118 @@
+\documentclass{tufte-handout}
+
+\title{Math 352: Homework 3}
+\author{Anthony Brice}
+
+\usepackage{graphicx} % allow embedded images
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+% \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath, amsthm, amssymb}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim
+                              % environments
+
+
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+
+\usepackage[scaled]{berasans}
+\usepackage[T1]{fontenc}
+\usepackage{listings,xcolor}
+%\lstloadlanguages{[5.2]Mathematica}
+\lstset{language=Mathematica}
+
+\lstset{basicstyle={\sffamily\footnotesize},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt,
+  breaklines=true,
+  captionpos={t},
+  frame={lines},
+  rulecolor=\color{black},
+  framerule=0.5pt,
+  columns=flexible,
+  tabsize=2
+}
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command
+                                % specification environment
+
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}} % Macro for scientific
+                                % notation
+
+% Use fancy symbols for footnotes
+\usepackage{hyperref}
+\usepackage{natbib}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{perpage}
+\MakePerPage{footnote}
+
+\begin{document}
+
+\maketitle
+\section{Section 3.1}
+\subsection{Exercise 6}
+\begin{description}
+\item \emph{In arranging people around a circular table, we take into
+    account their seats relative to each other, not the actual
+    position of any one person. Show that $n$ people can be arranged
+    around a circular table in $(n - 1)!$ ways.}
+\end{description}
+
+Consider that if we arranged $n$ people in a line, we would have $n!$
+ways to arrange them. Since the round table has no first or last
+position, any single arrangement of $n$ people around a table has $n$
+corresponding linear arrangements. Then to compute our solution, we
+take $n!$ and divide it by $n$ to account for the fact that $n!$
+counts each arrangement $n$ times. Then
+\begin{align*}
+\frac{n!}{n} &= \frac{n(n-1)!}{n}\\
+&= (n-1)! \, .
+\end{align*}
+
+\subsection{Exercise 8}
+\begin{description}
+\item \emph{A finite set $\Omega$ has $n$ elements. Show that if we
+    count the empty set and $\Omega$ as subsets, there are $2^n$ subsets
+    of $\Omega$.}
+\end{description}
+
+Consider constructing a subset. For each element in $\Omega$, there
+are two distinct events: that the element is included or that it is
+not. Each event is independent, so the number of events is $2^n$.
+
+\subsection{Exercise 20}
+\begin{description}
+\item \emph{At a mathematical conference, ten participants are
+    randomly seated around a circular table for meals. Using
+    simulation, estimate the probability that no two people sit next
+    to each other at both lunch and dinner. Can you make an
+    intelligent conjecture for the case of $n$ participants when $n$
+    is large?}
+\end{description}
+
+To estimate the probability, we wrote the program
+\textbf{\mbox{MathConference}}. From $50\,000$ trials, it estimated
+the probability to be about $.08$. By parameterizing the program on
+the number of participants $n$, we note that as $n$ increases so does
+our probability, but at a vastly reduced rate.
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

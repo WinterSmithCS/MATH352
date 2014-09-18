@@ -72,11 +72,28 @@
 \end{description}
 
 My modified
-program\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw2/hw2.nb}}
+program \lstinline$montecarloprime$\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw2/hw2.nb}},
 estimated the area to be $.778$. This is about $1/100$ off from
 $\pi/4$. Estimating the value $\pi$, \[\pi \approx 4(.778) = 3.112
 \,.\]
 This puts us about $4/100$ off of the true value of $\pi$.
+
+\begin{lstlisting}
+circlep[x_] := {x, 1/2 + Sqrt[x - x^2]}
+circlem[x_] := {x, 1/2 - Sqrt[x - x^2]}
+montecarloprime = Block[{randpoint,
+   count = 0},
+  For[i = 0, i <= 1000, i++,
+   randpoint = {RandomReal[{0, 1}],
+     RandomReal[{0, 1}]};
+   If [randpoint[[2]] < circlep[randpoint[[1]]][[2]] && 
+     randpoint[[2]] > circlem[randpoint[[1]]][[2]],
+    count++
+    ];
+   ];
+  Print[(count/1000) // N];
+  ]
+\end{lstlisting}
 
 \subsection{Exercise 4}
 \begin{description}
@@ -87,8 +104,9 @@ This puts us about $4/100$ off of the true value of $\pi$.
     of $\pi$. How accurate is your estimate?}
 \end{description}
 
-My modified program estimated the area to be $.6333$. For the actual area,
-let $u = \pi x$, then $du = \pi \; dx$, then
+My modified program (\lstinline$montecarlo[10000, Sin[Pi#]&, 0, 1, 1]$)
+estimated the area to be $.6333$. For the actual area, let $u = \pi
+x$, then $du = \pi \; dx$, then
 \begin{align*}
   \int_0^1 \sin \pi x \; dx & = \frac{1}{\pi} \int_0^\pi
   \sin(u) \; du \\
@@ -114,8 +132,9 @@ My estimate is about $2/100$ off.
     $\log{2}$. How accurate is your estimate?}
 \end{description}
 
-My altered program estimated the area to be $.693$. For the true area,
-let $u = x + 1$, then $du = dx$, then
+My altered program (\lstinline$montecarlo[10000, 1/(#+1)&, 0, 1, 1]$)
+ estimated the area to be $.693$. For the true area, let $u = x +
+1$, then $du = dx$, then
 \begin{align*}
  \int_0^1 \frac{1}{x+1} \; dx &= \int_1^2 \frac{1}{u} \;
  du \\
@@ -145,32 +164,7 @@ Since $\log{2} \approx .69315$, my estimate is pretty good.
     well?}
 \end{description}
 
-We wrote the function \lstinline$AvgWait$,
-
-\begin{lstlisting}
-AvgWait[n_, avgTime_] :=
- Block[
-  {randtime,
-   timelist = {}
-   },
-  For[i = 0, i < n, i++,
-   randtime = -avgTime Log[RandomReal[{0, 1}]];
-   timelist = Append[timelist, randtime];
-   ];
-  Histogram[Select[timelist, 0 <= # <= 120 &], 24]
-    Plot[(1/30) Exp[-(1/30) x], {x, 0, 120}]
-  ]
-\end{lstlisting}
-We chose to show two a histogram and a plot of the exponential
-function side-by-side because it appears the \lstinline$Areabargraph$
-function provided by the author is deprecated and fixing it is beyond
-me. The output of \lstinline$AvgWait[10000,30]$ is given in Figures
-\ref{fig:barchart} and \ref{fig:exp}.
-
-Since the figures are scaled similarly, one can see that the function
-is a very good fit for the graph.
-
-\begin{marginfigure}
+\begin{marginfigure}[3cm]
   \centering
   \includegraphics{barchart}
   \caption{The histogram}
@@ -182,6 +176,31 @@ is a very good fit for the graph.
   \caption{The plot of the exponential function}
   \label{fig:exp}
 \end{marginfigure}
+
+We wrote the function \lstinline$AvgWait$,
+
+\begin{lstlisting}
+AvgWait[n_] :=
+ Block[
+  {randtime,
+   timelist = {}
+   },
+  For[i = 0, i < n, i++,
+   randtime = -30 Log[RandomReal[{0, 1}]];
+   timelist = Append[timelist, randtime];
+   ];
+  Histogram[Select[timelist, 0 <= # <= 120 &], 24]
+    Plot[(1/30) Exp[-(1/30) x], {x, 0, 120}]
+  ]
+\end{lstlisting}
+We chose to show two a histogram and a plot of the exponential
+function side-by-side because it appears the \lstinline$Areabargraph$
+function provided by the author is deprecated and fixing it is beyond
+me. The output of \lstinline$AvgWait[10000]$ is given in Figures
+\ref{fig:barchart} and \ref{fig:exp}.
+
+Since the figures are scaled similarly, one can see that the function
+is a very good fit for the graph.
 
 \section{Section 2.2}
 \subsection{Exercise 6}
@@ -211,12 +230,12 @@ is a very good fit for the graph.
   \end{align*}
   Then the probability that the bulb will not burn out before $T$
   hours is $1-e^{-0.01T}$.
-\item [(b)] We need to find $T$ such that $F_T(x) = 1/2$. Then
+\item [(b)] We need to find $t \in T$ such that $F_T(t) = 1/2$. Then
   \begin{align*}
-    \frac{1}{2} &= 1 - e^{-0.01T} \\z
-    \frac{1}{2} &= e^{-0.01T} \\
-    \log{\frac{1}{2}} &= -0.01T \\
-    T &= -\frac{\log{\frac{1}{2}}}{0.01} \\
+    \frac{1}{2} &= 1 - e^{-0.01t} \\
+    \frac{1}{2} &= e^{-0.01t} \\
+    \log{\frac{1}{2}} &= -0.01t \\
+    t &= -\frac{\log{\frac{1}{2}}}{0.01} \\
     &= 69.3147 \, .
   \end{align*}
 \end{description}
