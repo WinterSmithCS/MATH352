@@ -1,12 +1,10 @@
 -- InterviewOrder.hs
 
 import Control.Monad (replicateM)
-import System.Random (newStdGen, mkStdGen)
+import System.Random (newStdGen)
 import System.Random.Shuffle (shuffle')
 import System.Environment (getArgs)
-import Data.List.Split (chunksOf)
 import Data.List (elemIndices, findIndices)
-import Data.Maybe (fromMaybe)
 
 isSuccess :: Int -> [Int] -> Bool
 isSuccess k xs = 1 `notElem` take (k-1) xs
