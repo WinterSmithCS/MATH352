@@ -55,9 +55,11 @@
 % Use fancy symbols for footnotes
 \usepackage{hyperref}
 \usepackage{natbib}
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}%
 \usepackage{perpage}
 \MakePerPage{footnote}
+
+%\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textsf{#1}}%
 
 \begin{document}
 
@@ -89,9 +91,10 @@ counts each arrangement $n$ times. Then
     of $\Omega$.}
 \end{description}
 
-Consider constructing a subset. For each element in $\Omega$, there
-are two distinct events: that the element is included or that it is
-not. Each event is independent, so the number of events is $2^n$.
+Consider constructing an arbitrary subset of $\Omega$. For each
+element in $\Omega$, there are two distinct events: that the element
+is included, or that it is not. Each event is necessarily independent,
+so the number of events is $2^n$.
 
 \subsection{Exercise 20}
 \begin{description}
@@ -104,10 +107,62 @@ not. Each event is independent, so the number of events is $2^n$.
 \end{description}
 
 To estimate the probability, we wrote the program
-\textbf{\mbox{MathConference}}. From $50\,000$ trials, it estimated
-the probability to be about $.08$. By parameterizing the program on
-the number of participants $n$, we note that as $n$ increases so does
-our probability, but at a vastly reduced rate.
+\textbf{\mbox{MathConference}}\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/MathConference.hs}}. From
+$50\,000$ trials, it estimated the probability to be about $.08$. By
+parameterizing the program on the number of participants $n$, we note
+that as $n$ increases so does our probability, but at a vastly reduced
+rate.
+
+\subsection{Exercise 22}
+\begin{description}
+\item \emph{Mr.~Wimply Dimple, one of London's most prestigious watch
+    makers, has come to Sherlock Holmes in a panic, having discovered
+    that someone has been producing and selling crude counterfeits of
+    his best selling watch. The $16$ counterfeits so far discovered
+    bear stamped numbers, all of which fall between $1$ and $56$, with
+    the largest stamped number equaling $56$, and Dimple is anxious to
+    know the extent of the forger's work. All present agree that it
+    seems reasonable to assume that the counterfeits thus far produced
+    bear consecutive numbers from $1$ to whatever the total number
+    is.}
+
+  \emph{``Chin up, Dimple,'' opines Dr.~Watson. ``I shouldn't worry
+    overly much if I were you; the Maximum Likelihood Principle, which
+    estimates the total number as precisely that which gives the
+    highest probability for the series of numbers found, suggests that
+    we guess $56$ itself as the total. Thus, your forgers are not a
+    big operation, and we shall have them safely behind bars before
+    your business suffers significantly.''}
+
+  \emph{``Stuff, nonsense, and bother your fancy principles, Watson''
+    counters Holmes. ``Anyone can see that, of course, there must be
+    quite a few more than $56$ watches---why the odds of our having
+    discovered precisely the highest numbered watch made are laughably
+    negligible. A much better guess would be twice $56$.''}
+
+  \begin{description}
+  \item[(a)] \emph{Show that Watson is correct that the Maximum
+      Likelihood Principle gives $56$.}
+  \item[(b)] \emph{Write a computer program to compare Holmes's and
+      Watson's guessing strategies as follows: fix a total of $N$ and
+      choose $16$ integers randomly between $1$ and $N$. Let $m$
+      denote the largest of these. Then Watson's guess for $N$ is $m$,
+      while Holmes's is $2m$. See which is closer to $N$. Repeat this
+      experiment (with $N$ still fixed) a hundred or more times, and
+      determine the proportion of times that each comes closer. Whose
+      seems to be a better strategy?}
+  \end{description}
+\end{description}
+
+\begin{description}
+\item[\rm (a)] Let $n$ be the true number of forged watches. Clearly
+  $n \nless 56$. Since we have a uniformly random distribution, $1/n$
+  is the likelihood that any watch numbered greater than or equal to
+  $56$ is the maximum-numbered watch. Then for all $n$,
+  $1/n$ is at its maximum when $n = 56$.
+\item[\rm (b)] We wrote the program \textbf{HolmesWatson} to compare
+  the strategies.
+\end{description}
 
 
 \end{document}
@@ -116,3 +171,5 @@ our probability, but at a vastly reduced rate.
 %%% mode: latex
 %%% TeX-master: t
 %%% End: 
+
+%  LocalWords:  Watson's
