@@ -77,8 +77,8 @@ Consider that if we arranged $n$ people in a line, we would have $n!$
 ways to arrange them. Since the round table has no first or last
 position, any single arrangement of $n$ people around a table has $n$
 corresponding linear arrangements. Then to compute our solution, we
-take $n!$ and divide it by $n$ to account for the fact that $n!$
-counts each arrangement $n$ times. Then
+take $n!$ and divide it by $n$ because $n!$ counts each arrangement
+$n$ times. Then
 \begin{align*}
 \frac{n!}{n} &= \frac{n(n-1)!}{n}\\
 &= (n-1)! \, .
@@ -91,10 +91,10 @@ counts each arrangement $n$ times. Then
     of $\Omega$.}
 \end{description}
 
-Consider constructing an arbitrary subset of $\Omega$. For each
+Consider the construction of an arbitrary subset of $\Omega$. For each
 element in $\Omega$, there are two distinct events: that the element
-is included, or that it is not. Each event is necessarily independent,
-so the number of events is $2^n$.
+is included in our subset, or that it is not. Each event is
+necessarily independent, so the number of events is $2^n$.
 
 \subsection{Exercise 20}
 \begin{description}
@@ -107,8 +107,9 @@ so the number of events is $2^n$.
 \end{description}
 
 To estimate the probability, we wrote the program
-\textbf{\mbox{MathConference}}\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/MathConference.hs}}. From
-$50\,000$ trials, it estimated the probability to be about $.08$. By
+\textbf{\mbox{MathConference}}%
+\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/MathConference.hs}}. From
+$50\,000$ trials, we estimated the probability to be about $.08$. By
 parameterizing the program on the number of participants $n$, we note
 that as $n$ increases so does our probability, but at a vastly reduced
 rate.
@@ -160,10 +161,71 @@ rate.
   is the likelihood that any watch numbered greater than or equal to
   $56$ is the maximum-numbered watch. Then for all $n$,
   $1/n$ is at its maximum when $n = 56$.
-\item[\rm (b)] We wrote the program \textbf{HolmesWatson} to compare
-  the strategies.
+\item[\rm (b)] We wrote the program
+  \textbf{HolmesWatson\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/HolmesWatson.hs}}}
+  to compare the strategies. With $N = 200$ and $100\,000$ iterations,
+  we estimated the probability that Holmes's strategy would come
+  closer to be $.00009$. Watson's is a far better strategy whenever
+  the sample size is greater than $1$.
 \end{description}
 
+\subsection{Exercise 23}
+\begin{description}
+\item \emph{Barbara Smith is interviewing candidates to be her
+    secretary. As she interviews the candidates, she can determine the
+    relative rank of the candidates but not the true rank. Thus, if
+    there are six candidates and their true rank is $6, 1, 4, 2, 3,
+    5$, (where $1$ is best) then after she had interviewed the first
+    three candidates she would rank them $3, 1, 2$. As she interviews
+    each candidate, she must either accept or reject the candidate. If
+    she does not accept the candidate after the interview, the
+    candidate is lost to her. She wants to decide on a strategy for
+    deciding when to stop and accept a candidate that will maximize
+    the probability of getting the best candidate. Assume that there
+    are $n$ candidates and they arrive in a random rank order.}
+  \begin{description}
+  \item[(a)] \emph{What is the probability that Barbara gets the best
+      candidate if she interviews all of the candidates? What is it if
+      she chooses the first candidate?}
+  \item[(b)] \emph{Assume that Barbara decides to interview the first
+      half of the candidates and then continue interviewing them until
+      a candidate better than any seen so far. Show that she has a
+      better than $25$ percent chance of ending up with the best
+      candidate.}
+  \end{description}
+\end{description}
+
+\begin{description}
+\item[\rm (a)] Since the best candidate has an equal probability of
+  appearing in any position in the ordering, the likelihood of either
+  event is the same, $1/6$.
+\item[\rm (b)] Consider the case in which the second best candidate
+  appears in the first half of the interview and the best candidate
+  appears in the second half. The probability of this event is $1/4$
+  since the probability of either is $1/2$. Any event of this case
+  results in Barbara getting the best candidate. Since we have at
+  least $1$ other event in which Barbara hires the best candidate
+  (such as $6,5,4,1,2,3$), the probability that this strategy will
+  yield the best candidate is greater than $1/4$.
+\end{description}
+
+\subsection{Exercise 24}
+\begin{description}
+\item \emph{For the task described in Exercise $23$, it can be shown
+    that the best strategy is to pass over the first $k-1$ candidates
+    where $k$ is the smallest integer for which}
+  \[\frac{1}{k} + \frac{1}{k+1} + \cdots + \frac{1}{n-1} \leq 1 \, .\]
+  \emph{Using this strategy the probability of getting the best
+    candidate is approximately $1/e = .368$. Write a program to
+    simulate Barbara Smith's interviewing if she uses this optimal
+    strategy, using $n=10$, and see if you can verify that the
+    probability of success is approximately $1/e$.}
+\end{description}
+
+To begin, we must find $k$.
+\begin{align*}
+
+\end{align*}
 
 \end{document}
 

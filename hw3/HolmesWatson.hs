@@ -1,8 +1,6 @@
 -- HolmesWatson.hs
 
-import Control.Monad (replicateM)
-import System.Random (newStdGen, randomRs, RandomGen, StdGen, mkStdGen)
-import System.Random.Shuffle (shuffle')
+import System.Random (newStdGen, randomRs)
 import System.Environment (getArgs)
 import Data.List.Split (chunksOf)
 
