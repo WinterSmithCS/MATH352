@@ -162,7 +162,8 @@ rate.
   $56$ is the maximum-numbered watch. Then for all $n$,
   $1/n$ is at its maximum when $n = 56$.
 \item[\rm (b)] We wrote the program
-  \textbf{HolmesWatson\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/HolmesWatson.hs}}}
+  \textbf{HolmesWatson}%
+  \footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/HolmesWatson.hs}}
   to compare the strategies. With $N = 200$ and $100\,000$ iterations,
   we estimated the probability that Holmes's strategy would come
   closer to be $.00009$. Watson's is a far better strategy whenever
@@ -222,10 +223,12 @@ rate.
     probability of success is approximately $1/e$.}
 \end{description}
 
-To begin, we must find $k$.
-\begin{align*}
-
-\end{align*}
+We found that with $n = 10$ our simulation \textbf{InterviewOrder}%
+\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/InterviewOrder.hs}}
+consistently somewhat overestimated the likelihood of
+success. Over $200\,000$ iterations, we estimated a likelihood of
+success to be $.39774$. We found that as $n$ increased our estimation
+approached $1/e$, but we do not have an explanation for the discrepancy.
 
 \end{document}
 
