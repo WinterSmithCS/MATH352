@@ -1,0 +1,86 @@
+% What format should I follow?  Your memo should be one single-spaced
+% page. You should use 12 point Times or Times New Roman for the body
+% text of your memo and Arial or other sans serif font for the
+% headings in your memo. Your margins should be 1 inch on all
+% sides. Your memo should be written in full block format using
+% Word. Full block format means no indention at the beginning of
+% paragraphs and left justification. To signal the end of one
+% paragraph and the beginning of another, you should leave one blank
+% line. Do not use a Word memo template for this assignment
+
+\documentclass[12pt]{letter} % 12 point font
+\usepackage[T1]{fontenc} % boilerplate
+\usepackage[utf8]{inputenc} % boilerplate
+\usepackage{mathptmx} % times new roman font
+\usepackage{nopageno} % no page numbers
+\usepackage[ocgcolorlinks]{hyperref} % for URLs
+
+
+\usepackage[margin=1in, letterpaper]{geometry}
+% letter paper and one-inch margins all around
+
+\setlength{\parindent}{0in} % no paragraph indentation
+\setlength{\parskip}{12pt} % one blank line after a paragraph
+
+% use {\Large\sffamily $yourHeading} (in braces as shown) for headings
+% example: {\Large\sffamily Foo Bar}
+
+\begin{document}
+
+{\sffamily
+  \textbf{To:} Spring 2015 Math 352 Students and Instructor\\
+  \textbf{From:} Anthony Brice\\ % `should include written initials
+                                 % of its author.' What does written mean?
+  \textbf{Date:} January 22, 2015\\
+  \textbf{Subject:} Math 352 and Student}
+
+% This summary sentence should not have a subheading
+The following introduces the author to his fellow students and their
+instructor.
+
+{\sffamily\textbf{Background Information}}
+
+I am Anthony Brice, a senior-standing computer science and mathematics
+major. I transferred from Ventura College in 2013 half-interested in
+mathematics, but after I took Anna Bieszczad's Java courses I knew what
+I wanted to make my career. My work style mainly entails getting
+distracted every fifteen minutes and trying to get as much work done
+as possible in between. I am always interested in undergraduate
+research opportunities, but my work schedule and other
+responsibilities make committing to anything pretty difficult.
+
+{\sffamily\textbf{Course Goals}}
+
+While I chose to take the course mostly because it's required for both
+my majors, I believe this to be one of the most rewarding courses in
+either discipline. I expect to leave the class with a much better
+understanding of the nature of probability and its applications. My
+programming experience will hopefully help me with projects in the
+course if I can find a way to fit it in.
+
+{\sffamily\textbf{Career, Life Goals, and I}}
+
+After graduation I plan to continue my career as a software
+engineer. I hope to land eventually at a workplace in which employees
+are expected to pay attention to the literature and trends in their
+field of expertise. I also hope to make some meaningful contribution
+to the free software community when I am ready.
+
+In my personal life, my fianc\'{e} and I plan to marry soon and settle
+local eventually. In my spare time I enjoy reading, video games, pop
+music, and server administration. You can find my streaming music
+server at \url{www.compastround.com:4040}, but clicking the link will
+leave you disappointed.
+
+I look forward to sharing the following semester and course with all
+of you.
+
+Best,\\
+Anthony Brice
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
