@@ -10,6 +10,7 @@
 \usepackage{booktabs} % book-quality tables
 \usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
+\usepackage{multirow}
 \usepackage{lipsum}   % filler text
 \usepackage{fancyvrb} % extended verbatim environments
   \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
@@ -37,8 +38,8 @@
 \begin{document}
 
 \maketitle
-\section{Section 1.1}
-\subsection{Problem 4}
+\section{Exercise 1.1.4}
+
 \begin{description}
 \item \textit{In racquetball, a player continues to serve as long as
     she is winning; a point is scored only when a player is serving
@@ -60,7 +61,26 @@ when one player reaches $21$ points and that player is declared the
 winner. We ran our program $500000$ times, and found that our
 probability of winning was about $0.8263$.
 
-\subsection{Problem 9}
+\section{Exercise 1.1.5}
+
+\begin{description}
+\item \textit{Consider the bet that all three dice will turn up sixes
+    at least once in $n$ rolls of three dice. Calculate $f(n)$, the
+    probability of at least one triple-six when three dice are rolled
+    $n$ times. Determine the smallest value of $n$ necessary for a
+    favorable bet that a triple-six will occur when three dice are
+    rolled $n$ times. (De Moivre would say it should be about $216
+    \log 2 = 149.7$ and so would answer $150$---see Exercise
+    1.2.17. Do you agree with him?)}
+\end{description}
+
+On any given roll, the probability of rolling a triple-six is $1/216$. Then
+the probability of at least one triple-six in $n$ trials is
+$n/216$. Then smallest value of $n$ necessary for a favorable bet is $109$
+trials, not $150$.
+
+\section{Exercise 1.1.9}
+
 \begin{description}
 \item \textit{The \textit{Labouchere system} for roulette is played as
     follows. Write down a list of numbers, usually $1$, $2$, $3$,
@@ -89,7 +109,8 @@ because the limit on the sum of the list extends to infinity as play
 continues. Thus the player would need a nearly infinite amount of
 money to ensure she plays each game until her list is empty.
 
-\subsection{Problem 10}
+\section{Exercise 1.1.10}
+
 \begin{description}
 \item \textit{Another well-known gambling system is the martingale
     doubling system. Suppose that you are betting on red to turn up in
@@ -114,8 +135,8 @@ very difficult since as with any typical gambling game, the odds are
 against the player and will become apparent over many repeated
 rounds. Thackeray's advice is sound.
 
-\section{Section 1.2}
-\subsection{Problem 6}
+\section{Exercise 1.2.6}
+
 \begin{description}
 \item \textit{A die is loaded in such a way that the probability of
     each face turning up is proportional to the number of dots on that
@@ -136,7 +157,90 @@ Then the probability of the event of rolling an even face is
 \[\frac{2}{21} + \frac{4}{21} + \frac{6}{21} = \frac{12}{21} =
 \frac{4}{7}.\]
 
-\subsection{Problem 18}
+\section{Exercise 1.2.15*}
+
+\begin{description}
+\item \textit{Johnny and Mary are taking a mathematics course. The course has
+    only three grades: A, B, and C. The probability that Johnny get a
+    B is $.3$. Mary says he's lacking a real sense of proportion. The
+    probability that Mary gets a B is $.4$. The probability that
+    neither gets an A but at least one gets a B is $.1$. What is the
+    probability that at least one gets a B but neither gets a C?}
+\end{description}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{ccc}
+    \toprule
+    AA & AB & AC \\
+    BA & BB & BC \\
+    CA & CB & CC \\
+    \bottomrule
+  \end{tabular}
+  \caption{The possible configurations of Johnny's and Mary's grades.}
+  \label{tab:1.2.15}
+\end{table}
+
+\vspace{5mm}
+
+We have nine distinct events, as shown in
+Table~\ref{tab:1.2.15}. Taking the left grade to be Mary's and the
+right to be Johnny's, we know that $P(\textrm{BA}) + P(\textrm{BB}) +
+P(\textrm{BC}) = .4$ and $P(\textrm{AB}) + P(\textrm{BB}) +
+P(\textrm{CB}) = .3$. We are also given that $P(\textrm{BB}) +
+P(\textrm{BC}) + P(\textrm{CB}) = .1$.
+
+Summing the first two equations we have that
+$P(\textrm{BA}) + 2P(\textrm{BB}) + P(\textrm{BC}) + P(\textrm{AB}) +
+P(\textrm{CB}) = .7$.
+Subtracting the latter, we then have
+$P(\textrm{BA}) + P(\textrm{BB}) + P(\textrm{AB}) = .6$, which is the
+probability that at least one gets a B and neither gets a C.
+
+\section{Exercise 1.2.17*}
+
+\begin{description}
+\item \textit{Assume that the probability of a ``success'' on a single
+  experiment with $n$ outcomes is $1/n$. Let $m$ be the number of
+  experiments necessary to make it a favorable bet that at least one
+  success will occur (see Exercise 1.1.15).
+  \begin{description}
+  \item[(a)] Show that the probability that, in $m$ trials, there are
+    no successes is $(1 - 1/n)^m$.
+  \item[(b)] (de~Moivre) Show that if $m = n \log 2$ then
+    \[
+    \lim_{n \rightarrow \infty} {\left( 1 - {1 \over n} \right)}^m = {1
+    \over 2}.
+    \]
+    Hint:
+    \[
+    \lim_{n \rightarrow \infty} {\left( 1 - {1 \over n} \right)}^n = e^{-1}.
+    \]
+    Hence for large $n$ we should choose $m$ to be about $n \log 2$.
+  \item[(c)] Would de Moivre have been led to the correct answer for
+    de~M\'er\'e's two bets if he had used his approximation?
+  \end{description}}
+\end{description}
+
+\begin{enumerate}[(a)]
+\item If the probability of a success on a single experiment with $n$
+  outcomes is $1/n$, then the probability of no success is $1 -
+  1/n$. Then the probability that there are no successes in $m$ trials
+  is ${(1 - 1/n)}^m$.
+\item
+  \begin{align*}
+    \lim_{n \rightarrow \infty} {\left( 1 - {1 \over n}\right)}^{n
+    \log 2} &= e^{ -\log 2} \\
+            &= {1 \over 2}.
+  \end{align*}
+\item For de~M\'er\'e's first bet, de~Moivre would have guessed $6
+  \log 2 \approx 4.1589$ so $5$, which is incorrect. For de~M\'er\'e's
+  second bet, de~Moivre would have guessed $36 \log 2 \approx 24.9533$
+  so $25$, which is correct.
+\end{enumerate}
+
+\section{Exercise 1.2.18}
+
 \begin{description}
 \item[(a)] \textit{For events $A_1,\dots, A_n$, prove that
   \[
@@ -180,7 +284,8 @@ Then the probability of the event of rolling an even face is
   \end{proof}
 \end{description}
 
-\subsection{Problem 31}
+\subsection{Exercise 1.2.31}
+
 \begin{description}
 \item \textit{A reader of Marilyn vos Savant's column wrote in with
     the following question: \quote{My dad heard this story on the
@@ -207,24 +312,21 @@ Then the probability of the event of rolling an even face is
 \end{description}
 
 \begin{description}
-\item[\emph{(a)}] The answer is indeed $1/16$. Let $1$ be the right front
-  tire, $2$ be left front, $3$ right rear, and $4$ left rear. We take as sample space
-  $\Omega = \{ (i,j) : 1 \leq i,j \leq 4\}$. To determine the size of
-  $\Omega$, we note that there are four choices for $i$, and for each
-  choice $i$, there are four choices for $j$, leading to $16$
-  different outcomes.
-\item[\emph{(b)}] Our sample space $E =
-  \{(1,1),(2,2),(3,3),(4,4)\}$. We can easily calculate the
-  probability of each outcome in our sample space:
+\item[\emph{(a)}] The answer is not $1/16$. There are $16$ possible
+  outcomes, but $4$ of them involve the students picking the same
+  tire. Thus the probability that they do so is $1/4$.
+\item[\emph{(b)}] Assigning natural numbers to each tire, we have that
+  our sample space $E = \{(1,1),(2,2),(3,3),(4,4)\}$. We can easily
+  calculate the probability of each outcome in our sample space:
   \begin{align*}
-    P(m(1,1)) &= P(1) \cdot P(1) = .58 \cdot .58 = .3364\\
-    P(m(2,2)) &= .11 \cdot .11 = .0121\\
-    P(m(3,3)) &= .18 \cdot .18 = .0324\\
-    P(m(4,4)) &= .13 \cdot .13 = .0169.
+    m(1,1) &= m(1) \cdot m(1) = .58 \cdot .58 = .3364\\
+    m(2,2) &= .11 \cdot .11 = .0121\\
+    m(3,3) &= .18 \cdot .18 = .0324\\
+    m(4,4) &= .13 \cdot .13 = .0169.
   \end{align*}
   Then the sum of all outcomes in $E$ is the probability that the
   students will pick the same tire. Thus
-  \[\sum_{\omega \in E} = P(E) = .3978.\]
+  \[P(E) = \sum_{\omega \in E} m(\omega) = .3978.\]
 \end{description}
 
 \end{document}
