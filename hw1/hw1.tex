@@ -258,16 +258,16 @@ probability that at least one gets a B and neither gets a C.
   P(A_1 \cup \dots \cup A_n) \leq P(A_1) + \dots + P(A_n).
   \]
 
-  \begin{proof} This is a corollary of Theorem $3.8$ which states ``to
-    find the probability that at least one of $n$ events $A_i$ occurs,
-    first add the probability of each event, then subtract the
-    probabilities of all two-way intersections, add the probability of
-    all three way intersections, and so forth.'' Clearly by adding all
-    probabilities, subtracting some intersections, and adding back
-    only probabilities of intersections that must be less than those
-    already subtracted, the probability of the unions must be less
-    than or equal to the sum
-    of the probability of the unions.\\
+  \begin{proof} Consider the base case, $n =1$. $P(A_1)$ is surely
+    less than or equal to $P(A_1)$.
+
+    Assume the claim is true when $n = k$. Then when $n = k + 1$,
+    \begin{align*}
+      P(A_1 \cup \dots \cup A_k \cup A_{k + 1}) &\leq P(A_1) + \dots +
+                                                  P(A_k) + P(A_{k + 1}).
+    \end{align*}
+
+    Let $P(K) =
   \end{proof}
 
 \item[\emph{(b)}]
