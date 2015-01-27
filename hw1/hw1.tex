@@ -38,28 +38,6 @@
 \begin{document}
 
 \maketitle
-\section{Exercise 1.1.4}
-
-\begin{description}
-\item \textit{In racquetball, a player continues to serve as long as
-    she is winning; a point is scored only when a player is serving
-    and wins the volley. The first player to win $21$ points wins the
-    game. Assume that you serve first and have a probability $.6$ of
-    winning a volley when you serve and probability $.5$ when your
-    opponent serves. Estimate, by simulation, the probability that you
-    will win a game.}
-\end{description}
-
-To estimate by simulation the probability that we will win the game,
-we wrote the program \textbf{Racquetball}\footnote{
-  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/racquetball.c}}.
-At each iteration, the program chooses a random number $m(\omega_i)$
-in $(0,1]$. From $m(\omega_i)$, the program calculates if the server
-won that volley. If so, the server's score is incremented and she
-continues to serve. If not, the other player serves. The game ends
-when one player reaches $21$ points and that player is declared the
-winner. We ran our program $500000$ times, and found that our
-probability of winning was about $0.8263$.
 
 \section{Exercise 1.1.5}
 
@@ -78,36 +56,6 @@ On any given roll, the probability of rolling a triple-six is $1/216$. Then
 the probability of at least one triple-six in $n$ trials is
 $n/216$. Then smallest value of $n$ necessary for a favorable bet is $109$
 trials, not $150$.
-
-\section{Exercise 1.1.9}
-
-\begin{description}
-\item \textit{The \textit{Labouchere system} for roulette is played as
-    follows. Write down a list of numbers, usually $1$, $2$, $3$,
-    $4$. Bet the sum of the first and last, $1+4 = 5$, on red. If you
-    win, delete the first and last numbers from your list. If you
-    lose, add the amount that you last bet to the end of your
-    list. Then use the new list and bet the sum of the first and last
-    numbers (if there is only one number, bet that amount). Continue
-    until your list becomes empty. Show that, if this happens, you win
-    the sum, $1+2+3+4 = 10$, of your original list. Simulate this
-    system and see if you do always stop and, hence, always win. If
-    so, why is this not a foolproof gambling system?}
-\end{description}
-
-To show that we always win the sum of our list, consider that at any
-given moment in the game the sum of the list and our winnings is
-always the initial sum of the list. Consider the case when we lose a
-round; the debit from our winnings is added to the list. Consider the
-case when we win; the credit to our winnings is removed from the
-list. Thus we always win the initial sum of the list.
-
-We simulated the system with the program \textbf{Labouchere}\footnote{
-  \url{https://github.com/anthonybrice/MATH352/blob/master/hw1/Labouchere.hs}}.
-Of course, play always does stop. This is not a foolproof gambling system
-because the limit on the sum of the list extends to infinity as play
-continues. Thus the player would need a nearly infinite amount of
-money to ensure she plays each game until her list is empty.
 
 \section{Exercise 1.1.10}
 
@@ -253,36 +201,43 @@ probability that at least one gets a B and neither gets a C.
 \end{description}
 
 \begin{description}
-\item[\emph{(a)}]
-  \[
-  P(A_1 \cup \dots \cup A_n) \leq P(A_1) + \dots + P(A_n).
-  \]
+  \begin{samepage}
+  \item[\emph{(a)}]
+    \[
+    P(A_1 \cup \dots \cup A_n) \leq P(A_1) + \dots + P(A_n).
+    \]
 
-  \begin{proof} Consider the base case, $n =1$. $P(A_1)$ is surely
-    less than or equal to $P(A_1)$.
+    \begin{proof}
+      Consider the base case, $n = 1$. Certainly $P(A_1) \leq P(A_1)$.
 
-    Assume the claim is true when $n = k$. Then when $n = k + 1$,
-    \begin{align*}
-      P(A_1 \cup \dots \cup A_k \cup A_{k + 1}) &\leq P(A_1) + \dots +
-                                                  P(A_k) + P(A_{k + 1}).
-    \end{align*}
+      Assume the claim is true when $n = k$. Then when $n = k + 1$, we
+      have on the left side of our inequality
+      $P(A_1 \cup \dots \cup A_{k + 1})$. Let
+      $A_1 \cup \dots \cup A_k = K$. We then have on the left
+      $P(K \cup A_{k+1})$. By Theorem 1.4, \[ P(K \cup A_{k+1}) = P(K)
+      + P(A_{k +1}) - P(K \cap A_{k+1}).\]
 
-    Let $P(K) =
-  \end{proof}
+      Then by our assumption \[P(K) + P(A_{k+1}) - P(K \cap A_{k+1})
+      \leq P(A_1) + \dots + P(A_{k+1}).\]
+    \end{proof}
+  \end{samepage}
 
-\item[\emph{(b)}]
-  \[P(A \cap B) \geq P(A) + P(B) - 1.\]
-
-  \begin{proof}
-    We begin with this statement proved in Theorem $1.4$:
-    \[P(A \cup B) = P(A) + P(B) - P(A \cap B).\]
-    Through substitution and the fact that $P(A \cup B) \leq 1$, we
-    have that
-    \[1 \geq P(A) + P(B) - P(A \cap B).\]
-    We simply rearrange our terms and
+  \begin{samepage}
+  \item[\emph{(b)}]
     \[P(A \cap B) \geq P(A) + P(B) - 1.\]
-  \end{proof}
+
+    \begin{proof}
+      We begin with this statement proved in Theorem 1.4:
+      \[P(A \cup B) = P(A) + P(B) - P(A \cap B).\]
+      Through substitution and the fact that $P(A \cup B) \leq 1$, we
+      have that
+      \[1 \geq P(A) + P(B) - P(A \cap B).\]
+      We simply rearrange our terms and
+      \[P(A \cap B) \geq P(A) + P(B) - 1.\]
+    \end{proof}
+  \end{samepage}
 \end{description}
+
 
 \subsection{Exercise 1.2.31}
 
