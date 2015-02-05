@@ -10,10 +10,21 @@
 \usepackage{booktabs} % book-quality tables
 \usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
+\usepackage{multirow} % ???
 \usepackage{lipsum}   % filler text
 \usepackage{fancyvrb} % extended verbatim environments
-  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim
-                              % environments
+\fvset{fontsize=\normalsize}% default font size for fancy-verbatim
+% environments
+\usepackage{enumitem} % for fancy lists
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name=Listing]{mylisting}
+
+\newenvironment{listingenv} {
+  \begin{mylisting}
+} {
+  \end{mylisting}
+}
 
 \usepackage{subcaption}
 \captionsetup{compatibility=false}
@@ -21,7 +32,7 @@
 \usepackage[scaled]{berasans}
 \usepackage[T1]{fontenc}
 \usepackage{listings,xcolor}
-%\lstloadlanguages{[5.2]Mathematica}
+% \lstloadlanguages{[5.2]Mathematica}
 \lstset{language=Mathematica}
 
 \lstset{basicstyle={\sffamily\footnotesize},
@@ -46,10 +57,10 @@
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 \newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command
-                                % specification environment
+% specification environment
 
 \newcommand{\e}[1]{\ensuremath{\times 10^{#1}}} % Macro for scientific
-                                % notation
+% notation
 
 % Use fancy symbols for footnotes
 \usepackage{hyperref}
@@ -61,23 +72,24 @@
 \begin{document}
 
 \maketitle
-\section{Section 2.1}
-\subsection{Exercise 3}
-\begin{description}
-\item \textit{Alter the program \textbf{MonteCarlo} to estimate the
-    area of the circle of radius $1/2$ with center at $(1/2,1/2)$
-    inside the unit square by choosing $1000$ points at random. Compare
-    your results with the true value of $\pi/4$. Use your results to
-    estimate the value of $\pi$. How accurate is your estimate?}
-\end{description}
 
-My modified
-program \lstinline$montecarloprime$\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw2/hw2.nb}},
-estimated the area to be $.778$. This is about $1/100$ off from
-$\pi/4$. Estimating the value $\pi$, \[\pi \approx 4(.778) = 3.112
-\,.\]
-This puts us about $4/100$ off of the true value of $\pi$.
+\section{Exercise 2.1.3}
 
+\textit{Alter the program \textbf{MonteCarlo} to estimate the area of
+  the circle of radius $1/2$ with center at $(1/2,1/2)$ inside the
+  unit square by choosing $1000$ points at random. Compare your
+  results with the true value of $\pi/4$. Use your results to estimate
+  the value of $\pi$. How accurate is your estimate?}
+
+\bigskip
+
+My modified program \textbf{MonteCarloPrime}, estimated the area to
+be $.778$. This is about $1/100$ off from $\pi/4$. Estimating the
+value $\pi$, \[\pi \approx 4(.778) = 3.112 \,,\]
+places my estimate about $4/100$ off $\pi$.
+
+\begin{listingenv}
+\caption{The program \mbox{\textbf{MonteCarloPrime}}.}
 \begin{lstlisting}
 circlep[x_] := {x, 1/2 + Sqrt[x - x^2]}
 circlem[x_] := {x, 1/2 - Sqrt[x - x^2]}
@@ -86,7 +98,7 @@ montecarloprime = Block[{randpoint,
   For[i = 0, i <= 1000, i++,
    randpoint = {RandomReal[{0, 1}],
      RandomReal[{0, 1}]};
-   If [randpoint[[2]] < circlep[randpoint[[1]]][[2]] && 
+   If [randpoint[[2]] < circlep[randpoint[[1]]][[2]] &&
      randpoint[[2]] > circlem[randpoint[[1]]][[2]],
     count++
     ];
@@ -94,91 +106,105 @@ montecarloprime = Block[{randpoint,
   Print[(count/1000) // N];
   ]
 \end{lstlisting}
+\end{listingenv}
 
-\subsection{Exercise 4}
-\begin{description}
-\item \textit{Alter the program \textbf{MonteCarlo} to estimate the
-    area under the graph of $y = \sin{\pi x}$ inside the unit square by
-    choosing $10,000$ points at random. Now calculate the true value
-    of this area and use your simulation results to estimate the value
-    of $\pi$. How accurate is your estimate?}
-\end{description}
+\section{Exercise 2.1.4}
+
+\textit{Alter the program \textbf{MonteCarlo} to estimate the area
+  under the graph of $y = \sin{\pi x}$ inside the unit square by
+  choosing $10,000$ points at random. Now calculate the true value of
+  this area and use your simulation results to estimate the value of
+  $\pi$. How accurate is your estimate?}
+
+\bigskip
 
 My modified program (\lstinline$montecarlo[10000, Sin[Pi#]&, 0, 1, 1]$)
 estimated the area to be $.6333$. For the actual area, let $u = \pi
 x$, then $du = \pi \; dx$, then
 \begin{align*}
   \int_0^1 \sin \pi x \; dx & = \frac{1}{\pi} \int_0^\pi
-  \sin(u) \; du \\
-  &= \left[ - \frac{\cos u}{\pi} \right]_0^\pi \\
-  &= \left[ - \frac{\cos \pi x}{\pi} \right]_0^1 \\
-  &= \frac{2}{\pi} \, .
+                              \sin(u) \; du \\
+                            &= \left[ - \frac{\cos u}{\pi} \right]_0^\pi \\
+                            &= \left[ - \frac{\cos \pi x}{\pi} \right]_0^1 \\
+                            &= \frac{2}{\pi}.
 \end{align*}
 
 To approximate pi,
 \begin{align*}
   \frac{2}{\pi} & \approx .6333 \\
   \frac{\pi}{2} & \approx 1.57903 \\
-  \pi & \approx 3.15806 \, .
+  \pi & \approx 3.15806.
 \end{align*}
 My estimate is about $2/100$ off.
 
-\subsection{Exercise 5}
-\begin{description}
-\item \textit{Alter the program \textbf{MonteCarlo} to estimate the
-    area under the graph of $y = 1/(x+1)$ in the unit square in the
-    same way as Exercise~4. Calculate the true value of this area and
-    use your simulation results to estimate the value of
-    $\log{2}$. How accurate is your estimate?}
-\end{description}
+\section{Exercise 2.1.5}
+
+\textit{Alter the program \textbf{MonteCarlo} to estimate the area
+  under the graph of $y = 1/(x+1)$ in the unit square in the same way
+  as Exercise~4. Calculate the true value of this area and use your
+  simulation results to estimate the value of $\log{2}$. How accurate
+  is your estimate?}
+
+\bigskip
 
 My altered program (\lstinline$montecarlo[10000, 1/(#+1)&, 0, 1, 1]$)
- estimated the area to be $.693$. For the true area, let $u = x +
+estimated the area to be $.693$. For the true area, let $u = x +
 1$, then $du = dx$, then
 \begin{align*}
- \int_0^1 \frac{1}{x+1} \; dx &= \int_1^2 \frac{1}{u} \;
- du \\
- &= \left[ \log{u} \right]_1^2 \\
- &= \log{2} \, .
+  \int_0^1 \frac{1}{x+1} \; dx &= \int_1^2 \frac{1}{u} \;
+                                 du \\
+                               &= \left[ \log{u} \right]_1^2 \\
+                               &= \log{2} \, .
 \end{align*}
 Since $\log{2} \approx .69315$, my estimate is pretty good.
 
-\subsection{Exercise 9}
-\begin{description}
-\item \textit{A large number of waiting time problems have an
-    exponential distribution of outcomes. We shall see (in
-    Section~5.2) that such outcomes are simulated by computing
-    $(-1/\lambda)\log{(\mathrm{rnd})}$, where $\lambda > 0$. For
-    waiting times produced in this way, the average waiting time is
-    $1/\lambda$. For example, the times spent waiting for a car to
-    pass on a highway, or the times between emissions of particles
-    from a radioactive source, are simulated by a sequence of random
-    numbers, each of which is chosen by computing
-    $(-1/\lambda)\log{(\mathrm{rnd})}$, where $1/\lambda$ is the
-    average time between cars or emissions. Write a program to
-    simulate the times between cars when the average time between cars
-    is $30$ seconds. Have your program compute an area bar graph for
-    these times by breaking the time interval from $0$ to $120$ into
-    $24$ subintervals. On the same pair of axes, plot the function
-    $f(x) = (1/30)e^{-(1/30)x}.$ Does the function fit the bar graph
-    well?}
-\end{description}
+\section{Exercise 2.1.9}
 
-\begin{marginfigure}[3cm]
+\textit{A large number of waiting time problems have an exponential
+  distribution of outcomes. We shall see (in Section~5.2) that such
+  outcomes are simulated by computing
+  $(-1/\lambda)\log{(\mathrm{rnd})}$, where $\lambda > 0$. For waiting
+  times produced in this way, the average waiting time is
+  $1/\lambda$. For example, the times spent waiting for a car to pass
+  on a highway, or the times between emissions of particles from a
+  radioactive source, are simulated by a sequence of random numbers,
+  each of which is chosen by computing
+  $(-1/\lambda)\log{(\mathrm{rnd})}$, where $1/\lambda$ is the average
+  time between cars or emissions. Write a program to simulate the
+  times between cars when the average time between cars is $30$
+  seconds. Have your program compute an area bar graph for these times
+  by breaking the time interval from $0$ to $120$ into $24$
+  subintervals. On the same pair of axes, plot the function
+  $f(x) = (1/30)e^{-(1/30)x}.$ Does the function fit the bar graph
+  well?}
+
+\bigskip
+
+\begin{marginfigure}
   \centering
   \includegraphics{barchart}
   \caption{The histogram}
   \label{fig:barchart}
 \end{marginfigure}
 
-\begin{marginfigure}
+\begin{marginfigure}[4cm]
   \includegraphics{exp}
   \caption{The plot of the exponential function}
   \label{fig:exp}
 \end{marginfigure}
 
-We wrote the function \lstinline$AvgWait$,
+We wrote the program \textbf{AvgWait}.  We chose to show two a
+histogram and a plot of the exponential function side-by-side because
+it appears the \lstinline$Areabargraph$ function provided by the
+author is deprecated and fixing it is beyond me. The output of
+\lstinline$AvgWait[10000]$ is given in Figures \ref{fig:barchart} and
+\ref{fig:exp}.
 
+Since the figures are scaled similarly, one can see that the function
+is a very good fit for the graph.
+
+\begin{listingenv}
+\caption{The program \mbox{\textbf{AvgWait}}.}
 \begin{lstlisting}
 AvgWait[n_] :=
  Block[
@@ -193,62 +219,58 @@ AvgWait[n_] :=
     Plot[(1/30) Exp[-(1/30) x], {x, 0, 120}]
   ]
 \end{lstlisting}
-We chose to show two a histogram and a plot of the exponential
-function side-by-side because it appears the \lstinline$Areabargraph$
-function provided by the author is deprecated and fixing it is beyond
-me. The output of \lstinline$AvgWait[10000]$ is given in Figures
-\ref{fig:barchart} and \ref{fig:exp}.
+\end{listingenv}
 
-Since the figures are scaled similarly, one can see that the function
-is a very good fit for the graph.
 
-\section{Section 2.2}
-\subsection{Exercise 6}
-\begin{description}
-\item \emph{Assume that a new light bulb will burn out after $t$
-    hours, where $t$ is chosen from $[0,\infty)$ with an exponential
-    density \[ f(t) = \lambda e^{-\lambda t} \, \]
-    In this context, $\lambda$ is often called the \emph{failure
-      rate} of the bulb.}
-  \begin{description}
-  \item [(a)] \emph{Assume that $\lambda = 0.01$, and find the probability
+\section{Exercise 2.2.6}
+
+\emph{Assume that a new light bulb will burn out after $t$ hours,
+  where $t$ is chosen from $[0,\infty)$ with an exponential density
+  \[ f(t) = \lambda e^{-\lambda t}.\]
+  In this context, $\lambda$ is often called the \emph{failure rate}
+  of the bulb.}
+\begin{enumerate}[label=\emph{(\alph*)}]
+\item \emph{Assume that $\lambda = 0.01$, and find the probability
     that the bulb will \emph{not} burn out before $T$ hours. This
     probability is often called the \emph{reliability} of the bulb.}
-  \item [(b)] \emph{For what $T$ is the reliability of the bulb $= 1/2$?}
-  \end{description}
-\end{description}
+\item \emph{For what $T$ is the reliability of the bulb
+    $= 1/2$?}
+\end{enumerate}
 
-\begin{description}
-\item [(a)] To find the probability that the bulb will not burn out
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item To find the probability that the bulb will not burn out
   before $T$ hours, we need to find $F_T(x)$, the cumulative distribution
-  function of $f(t)$. By Theorem $2.1$,
+  function of $f(t)$. By Theorem 2.1,
   \begin{align*}
     F_T(x) = \int_{0}^x \! f(t) \, dt &= \int_{0}^x \!
-    0.01 e^{-0.01 t} \, dt \\
-    &= \left[ -e^{-0.01t} \right]_0^x \\
-    &= 1 - e^{-0.01x} \, .
+                                        0.01 e^{-0.01 t} \, dt \\
+                                      &= \left[ -e^{-0.01t} \right]_0^x \\
+                                      &= 1 - e^{-0.01x} \, .
   \end{align*}
   Then the probability that the bulb will not burn out before $T$
   hours is $1-e^{-0.01T}$.
-\item [(b)] We need to find $t \in T$ such that $F_T(t) = 1/2$. Then
+\item We need to find $t \in T$ such that $F_T(t) = 1/2$. Then
   \begin{align*}
     \frac{1}{2} &= 1 - e^{-0.01t} \\
     \frac{1}{2} &= e^{-0.01t} \\
     \log{\frac{1}{2}} &= -0.01t \\
     t &= -\frac{\log{\frac{1}{2}}}{0.01} \\
-    &= 69.3147 \, .
+                &= 69.3147.
   \end{align*}
-\end{description}
+\end{enumerate}
 
-\subsection{Exercise 12}
-\begin{description}
-\item \emph{Take a stick of unit length and break it into three
-    pieces, choosing the break points at random. (The break points are
-    assumed to be chosen simultaneously.) What is the probability that
-    the three pieces can be used to form a triangle? \emph{Hint}: The
-    sum of the lengths of any two pieces must exceed the length of the
-    third, so each piece must have length $< 1/2$. Now use Exercise $8$(g).}
-\end{description}
+\section{Exercise 2.2.12}
+
+\emph{Take a stick of unit length and break it into three pieces,
+  choosing the break points at random. (The break points are assumed
+  to be chosen simultaneously.) What is the probability that the three
+  pieces can be used to form a triangle? \emph{Hint}: The sum of the
+  lengths of any two pieces must exceed the length of the third, so
+  each piece must have length $< 1/2$. Now use Exercise~8(g).}
+
+\bigskip
 
 \begin{marginfigure}
   \includegraphics{prob}
@@ -263,16 +285,78 @@ the conditions
 \begin{align*}
   X &< 1 - X \\
   Y &> 1 - Y \\
-  Y &< X + \frac{1}{2} \, .
+  Y &< X + \frac{1}{2}.
 \end{align*}
+
 Since our sample space is the unit square, we can calculate the area
 of the region that our inequalities allow. (See
 Figure~\ref{fig:prob}.) Considering the cases in which $X<Y$ and
 $Y>X$, we find that the area and thus the probability comes out to
 $1/4$.
 
+\section{Exercise 2.2.13*}
+
+\emph{Take a stick of unit length and break it into two pieces,
+  choosing the break point at random. Now break the longer of the two
+  pieces at a random point. What is the probability that the three
+  pieces can be used to form a triangle?}
+
+\bigskip
+
+Consider the two pieces of a broken stick. Let $X$ be the length of
+the shorter piece and $Y$ be the length of the longer piece. For the
+pieces to form a triangle after the next break, the length of the new
+longest piece must be less than or equal to $1/2$. Let $X$ be the
+length of the shorter piece. Then the probability of breaking the
+other at a length such that the longest piece is less than $1/2$ can
+be expressed as%
+\[ {X \over 1 - X}. \]
+
+Since $X \in (0, 1/2)$, we want to find the cumulative distribution of
+the above probability density. This is expressed%
+\[ 2\int_0^{1 \over 2} {X \over 1 - X} \, dX.\]%
+Let $u = 1 - X$. Then $1 - u = X$ and $-du = dX$. Then
+\begin{align*}
+  2\int_{u(0)}^{u \left({1 \over 2} \right) } -{1 - u \over u} \, du
+  &= 2\int_1^{1 \over 2} {u - 1 \over u} \, du\\
+  &= 2\int_1^{1 \over 2} 1 - {1 \over u} \, du\\
+  &= 2{\left[ u - \log u \right]}_1^{1 \over 2}\\
+  &= 2\left({1 \over 2} - \log {1 \over 2} - 1\right)\\
+  &= 2 \left( -{1 \over 2} + \log 2 \right)\\
+  &= -1 + 2 \log 2.
+\end{align*}
+
+\section{Exercise 2.2.16*}
+
+\emph{Three points are chosen \emph{at random} on a circle of
+  \emph{unit circumference}. What is the probability that the triangle
+  defined by these points as vertices has three acute angles?
+  \emph{Hint}: One of the angles is obtuse if and only if all three
+  points lie on the same semicircle. Take the circumference as the
+  interval $[0,1]$. Take one point at $0$ and the others at $B$ and
+  $C$.}
+
+\bigskip
+
+Let $A$, $B$, and $C$ our points along the circumference $[0,1]$ of
+our circle. Fix $A$ at $0$ and choose $B \in [0,1/2]$. Then to avoid
+obtuse angles, $C$ must be within a specific interval of length $B$. The
+probability of this occurrence is $B$.
+
+Then we want to find the cumulative distribution for all values of $B$.
+\begin{align*}
+  2\int_0^{1 \over 2} B \, dB
+  &= 2{\left[ {1 \over 2} B^2 \right]}_0^{1 \over 2}\\
+  &= {1 \over 4}.
+\end{align*}
+
 \end{document}
 
-%  LocalWords:  vos
+% LocalWords:  vos
 
 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
