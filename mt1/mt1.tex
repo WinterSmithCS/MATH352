@@ -1,0 +1,231 @@
+\documentclass{tufte-handout}
+
+\title{Math 352: Midterm 1 Take-home Portion}
+\author{Anthony Brice \marginnote{I worked with Trevor Scott.}}
+
+\usepackage{graphicx} % allow embedded images
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+% \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath, amsthm, amssymb}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{multirow} % ???
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim
+                              % environments
+\usepackage[inline]{enumitem} % for fancy lists
+
+\usepackage[T1]{fontenc}
+\usepackage{ccfonts}
+\usepackage[euler-digits,euler-hat-accent]{eulervm}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+% activate={true,nocompatibility} - activate protrusion and expansion
+% final - enable microtype; use "draft" to disable
+% tracking=true, kerning=true, spacing=true - activate these techniques
+% factor=1100 - add 10% to the protrusion amount (default is 1000)
+% stretch=10, shrink=10 - reduce stretchability/shrinkability (default
+% is 20/20)
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name=Listing]{mylisting}
+
+\newenvironment{listingenv} {
+  \begin{mylisting}
+} {
+  \end{mylisting}
+}
+
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+
+% \usepackage[scaled]{berasans}
+% \usepackage[T1]{fontenc}
+% \usepackage{listings,xcolor}
+% %\lstloadlanguages{[5.2]Mathematica}
+% \lstset{language=Mathematica}
+
+% \lstset{basicstyle={\sffamily\footnotesize},
+%   numbers=left,
+%   numberstyle=\tiny\color{gray},
+%   numbersep=5pt,
+%   breaklines=true,
+%   captionpos={t},
+%   frame={lines},
+%   rulecolor=\color{black},
+%   framerule=0.5pt,
+%   columns=flexible,
+%   tabsize=2
+% }
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}
+% command specification environment
+
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}} % Macro for scientific
+                                                % notation
+
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\Arg}{Arg}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+
+% Use fancy symbols for footnotes
+\usepackage{hyperref}
+\usepackage{natbib}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}%
+\usepackage{perpage}
+\MakePerPage{footnote}
+
+\usepackage{manfnt} % ???
+
+\usepackage{mathtools} % for \DeclarePairedDelimiter
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}% for nice absolute value
+                                            % bars
+
+% For marginnotes in math floats
+\newcommand{\filler}[1][10]%
+{   \foreach \x in {1,...,#1}
+    {   test
+    }
+}
+
+\def\mathnote#1{%
+  \tag*{\rlap{\hspace\marginparsep\smash{\parbox[t]{\marginparwidth}{%
+  \footnotesize#1}}}}
+}
+
+%\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textsf{#1}}%
+\begin{document}
+
+\maketitle
+
+\section{Exercise 5}
+
+\emph{Consider the right isosceles triangle with vertices $(0,0)$,
+  $(1,0)$, and $(0,1)$. Let $(X,0)$ be a point chosen uniformly on the
+  side of the triangle that lies on the $x$-axis. Let $Y$ be the
+  distance from that chosen point $(X,0)$ to vertex $(0,1)$ on the
+  $y$-axis.
+  \begin{enumerate}[label=(\alph*)]
+  \item What is the sample space for $Y$?
+  \item What is the probability density function for $Y$?
+  \item What is the cumulative distribution function for $Y$?
+  \end{enumerate}
+}
+
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item Let $\Omega$ be the sample space of $Y$. Note that for all $x
+  \in X\setminus\{0,1\}$, the  vertices $(0,0)$, $(X,0)$, and $(0,1)$
+  form a scalene triangle. Then $Y$ measures the length of the
+  hypotenuse of that scalene triangle. Then
+  $\Omega = [1, \sqrt{2}]$.
+\item We want to find $f_Y$ such that
+  \[
+  \int_1^{\sqrt 2} f_Y \, dy = 1.
+  \]
+
+  Via (c) (in which we find the cumulative distribution function
+  independently of the probability density function) and
+  \textbf{Theorem 2.1} from Grinstead, when $1 \leq Y \leq \sqrt 2$
+  \begin{align*}
+    f_Y(y)
+    &= {d \over dy} F_Y(y)\\
+    &= {d \over dy} \sqrt{y^2 - 1}\mathnote{Apply the chain rule.}\\
+    &= {y \over \sqrt{y^2 - 1}}.
+  \end{align*}
+
+  Then
+  \[
+  f_Y(y) =
+  \begin{cases}
+    {y \over \sqrt{y^2 - 1}} & \mathrm{for}\ 1 \leq y \leq \sqrt 2\\
+    0 & \mathrm{otherwise.}
+  \end{cases}
+  \]
+
+\item The cumulative distribution function of $f_Y$ is
+  \begin{align*}
+    F_Y(y)
+    &= P(Y \leq y)\mathnote{$Y = \sqrt{1 + X^2}$.}\\
+    &= P(\sqrt{1 + X^2} \leq y)\\
+    &= P(1 + X^2 \leq y^2)\\
+    &= P(X^2 \leq y^2 - 1)\\
+    &= P(X \leq \sqrt{y^2 - 1})\mathnote{Note that $X$ is distributed
+      uniformly along $[0,1]$. Then $P(X \leq x) = x$.}\\
+    &= \sqrt{y^2 - 1}.
+  \end{align*}
+\end{enumerate}
+
+\section{Exercise 6}
+
+\emph{Let $X$ be uniformly distributed on $(0,1)$.
+  \begin{enumerate}[label=(\alph*)]
+  \item Find the cumulative distribution function $F_Y$ for the random
+    variable $Y = X^{1/\beta}$ where $\beta > 0$.
+  \item What is the sample space for $Y$.
+  \item Find the probability density function $f$ for $Y$.
+  \item For what $\beta$ is $P(Y \leq 1/2) \leq 1/4$?
+  \end{enumerate}
+}
+
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item
+  \begin{align*}
+    F_Y(y)
+    &= P(Y \leq y)\\
+    &= P(X^{1/\beta} \leq y)\\
+    &= P(X \leq y^\beta)\\
+    &= y^\beta.
+  \end{align*}
+\item Since $X \in (0,1)$ and $1/\beta > 0$, $Y \in (0,1)$.
+\item When $0 < Y < 1$, the probability density function of $Y$ is
+  \begin{align*}
+    f_Y(y)
+    &= {d \over dy} y^\beta\\
+    &= \beta y^{\beta - 1}.
+  \end{align*}
+
+  Then
+  \[
+  f_Y(y) =
+  \begin{cases}
+    \beta y^{\beta - 1} & \mathrm{for}\ 0 < y < 1\\
+    0 & \mathrm{otherwise.}
+  \end{cases}
+  \]
+\item Via (a)
+  \[
+  P\left( Y \leq {1 \over 2} \right) = F_Y\left({1 \over 2} \right) =
+  {\left( {1 \over 2} \right)}^\beta.
+  \]
+
+  We want to find $\beta$ such that
+  \[
+  {\left( {1 \over 2} \right)}^\beta \leq {1 \over 4}.
+  \]
+  Then $\beta \geq 2$ are all $\beta$ such that $P(Y \leq 1/2) \leq 1/4$.
+\end{enumerate}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
