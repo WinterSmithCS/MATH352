@@ -1,0 +1,158 @@
+\documentclass{abrice}
+
+\title{Math 352: Homework 4}
+\author{Anthony Brice}
+
+
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 6}
+
+\emph{Charles claims that he can distinguish between beer and ale $75$
+  percent of the time.  Ruth bets that he cannot and, in fact, just
+  guesses.  To settle this, a bet is made: Charles is to be given ten
+  small glasses, each having been filled with beer or ale, chosen by
+  tossing a fair coin.  He wins the bet if he gets seven or more
+  correct.  Find the probability that Charles wins if he has the
+  ability that he claims.  Find the probability that Ruth wins if
+  Charles is guessing.}
+
+\bigskip
+
+This is clearly a Bernoulli trials process. Then we want to calculate
+$b(10,3/4,7)$ and $b(10,1/2,7)$. Note
+$ b(n,p,j) = {n \choose j} p^j q^{n - j}$ where $n$ is the number of
+trials, $j$ is the desired number of successes, $p$ is the probability
+of success, and $q = 1 - p$.
+
+\begin{align*}
+  b\left(10,{3 \over 4},7\right)
+  &= {10 \choose 7} {\left( 3 \over 4 \right)}^7 {\left( 1 \over 4
+    \right)}^3\\
+  &= .250282.
+\end{align*}
+
+\begin{align*}
+  b \left(10, {1 \over 2}, 7 \right)
+  &= {10 \choose 7} {\left( 1 \over 2 \right)}^7 {\left( 1 \over 2
+    \right)}^3\\
+  &= .117188.
+\end{align*}
+
+\section{Exercise 7}
+
+\emph{Show that
+  \[
+  b(n,p,j) = \frac pq \left(\frac {n - j + 1}j \right) b(n,p,j - 1),
+  \]
+  for $j \ge 1$. Use this fact to determine the value or values of
+  $j$ which give $b(n,p,j)$ its greatest value.  \emph{Hint:} Consider
+  the successive ratios as $j$ increases.}
+
+\bigskip
+
+\begin{proof}
+  \begin{align*}\mathnote{From \url{http://www.math.hawaii.edu/~ralph/Classes/371/Answersodd-5-17-03.pdf}.}
+    {b(n,p,1) \over b(n,p,j-1)}
+    &= { {n \choose j} p^j q^{n-j} \over {n \choose j -1} p^{j - 1}
+      q^{n - j + 1}}\\
+    &= {n! \over j!(n-j)!} \cdot {(n-j + 1)! (j - 1)! \over n!}
+      \cdot {p\over q}\\
+    &= {p \over q} \cdot {n - j + 1 \over j}.\\
+    & \qedhere
+  \end{align*}
+\end{proof}
+
+Note that
+\[
+{n - j + 1 \over j} \cdot {p \over q} \geq 1
+\]
+if and only if $j \leq p(n+1)$. Then $j = \floor{p(n+1)}$ gives the
+greatest value when $p(n+1) \notin \mathbb{Z}$. When $p(n+1) \in \mathbb{Z}$,
+both $j = p(n+1)$ and $j = p(n+1) - 1$ give the greatest value.
+
+\section{Exercise 10}
+
+\emph{In a ten-question true-false exam, find the probability that a
+  student gets a grade of $70$ percent or better by guessing.  Answer
+  the same question if the test has $30$ questions, and if the test has
+  $50$ questions.}
+
+\bigskip
+
+We want to calculate $b(10,.5,7)$, $b(30,.5,\ceil{.7(30)})$, and
+$b(50,.5,\ceil{.7(50)})$.
+
+\begin{align*}
+  b(10,.5,7)
+  &= {10 \choose 7}.5^7.5^{3}\\
+  &= .117188.
+\end{align*}
+
+\begin{align*}
+  b(30,.5,\ceil{.7(30)})
+  &= b(30,.5,21)\\
+  &= {30 \choose 21}.5^{21}.5^9\\
+  &= .0133246.
+\end{align*}
+
+\begin{align*}
+  b(50,.5,\ceil{.7(50)})
+  &= b(50,.5,35)\\
+  &= {50 \choose 35}.5^{35}.5^{15}\\
+  &= .00199914.
+\end{align*}
+
+\section{Exercise 12}
+
+\emph{A poker hand is a set of 5 cards randomly
+chosen from a deck of 52 cards.  Find the probability of a
+  \begin{enumerate}[label=(\alph*)]
+  \item royal flush (ten, jack, queen, king, ace in a single suit).
+  \item straight flush (five in a sequence in a single suit, but not a
+    royal flush).
+  \item four of a kind (four cards of the same face value).
+  \item full house (one pair and one triple, each of the same face
+    value).
+  \item flush (five cards in a single suit but not a straight or royal
+    flush).
+  \item straight (five cards in a sequence, not all the same suit).
+    (Note that in straights, an ace counts high or low.)
+  \end{enumerate}
+}
+
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item
+\end{enumerate}
+
+\section{Exercise 33*}
+
+\emph{$2n$ balls are chosen at random from a total of $2n$ red balls
+  and $2n$ blue balls.  Find a combinatorial expression for the
+  probability that the chosen balls are equally divided in color.  Use
+  Stirling's formula to estimate this probability.  Using
+  \textbf{BinomialProbabilities}, compare the exact value with
+  Stirling's approximation for $n = 20$.}
+
+\bigskip
+
+The number of different configurations of $2n$ balls from $4n$ is ${4n
+\choose 2n}$. We want to find the number of those that satisfy the
+condition of $n$ red balls and $n$ blue balls. Since the total balls
+are $1/2$ red and $1/2$ blue, surely half of ${4n \choose 2n}$
+satisfies our condition. Then our expression is
+\[
+{{1 \over 2}{4n \choose 2n} \over {4n \choose 2n}}.
+\]
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hw4.tex"
+%%% End:
