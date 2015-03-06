@@ -1,0 +1,187 @@
+\documentclass{abrice}
+
+\title{Math352: Homework 5}
+\author{Anthony Brice}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 4.1.5}
+
+\emph{A coin is tossed three times.  Consider the following events\newline
+$A$: Heads on the first toss.\newline
+$B$: Tails on the second.\newline
+$C$: Heads on the third toss.\newline
+$D$: All three outcomes the same (HHH or TTT).\newline
+$E$: Exactly one head turns up.
+\begin{enumerate}[label=(\alph*)]
+\item Which of the following pairs of these events are independent?\newline
+(1) $A$, $B$\newline
+(2) $A$, $D$\newline
+(3) $A$, $E$\newline
+(4) $D$, $E$
+\item Which of the following triples of these events are
+independent?\newline
+(1) $A$, $B$, $C$\newline
+(2) $A$, $B$, $D$\newline
+(3) $C$, $D$, $E$
+\end{enumerate}}
+
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item Events (1), (2), and (3) are independent.
+\item Event (1) is independent.
+\end{enumerate}
+
+\section{Exercise 4.1.6}
+
+\emph{From a deck of five cards numbered $2$,~$4$, $6$, $8$, and~$10$,
+  respectively, a card is drawn at random and replaced.  This is done
+  three times.  What is the probability that the card numbered $2$ was
+  drawn exactly two times, given that the sum of the numbers on the
+  three draws is~$12$?}
+
+\bigskip
+
+Let $F$ be the event that the card numbered $2$ was drawn exactly two
+times. Let $E$ be the event that the sum of the number on the three
+draws is $12$. Then we want to calculate $P(F \mid E) = P(F \cap E) /
+P(E)$.
+
+Consider $P(F \cap E)$. If the card numbered $2$ is drawn twice and
+the sum of the draws is $12$, then the third card must be numbered
+$8$. Then $P(F \cap E)$ is the number of permutations with two $2$'s
+and one $8$ divided by the total number of permutations of card
+sequences, or $P(F \cap E) = 3/ 5^3 = 3/125$.
+
+Consider $P(E)$, the number of permutations which sum to
+$12$ % \marginnote{With Haskell's list comprehensions, we calculate that
+%   number of permutations quite naturally:\newline%
+% \lstinline{length [ (x,y,z) | x <- deck, y <- deck,}\newline%
+% \lstinline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  z <- deck, x+y+z == 12 ]}}
+divided by the total number of permutations. Then $P(E) = 10/125$.
+
+Thus
+\begin{align*}
+  P(F \mid E)
+  &= { {3 \over 125} \over {10 \over 125}}\\
+  &= {3 \over 10}.
+\end{align*}
+
+\section{Exercise 4.1.13}
+
+\emph{Two cards are drawn from a bridge deck.  What is the probability
+  that the second card drawn is red?}
+
+\bigskip
+
+Let $A$ be the event that the second card is red, $B$ the event that
+the first card is black, and $C$ the event that the first card is
+red. Then $P(A \mid B) = 26/51$ and $P(A \mid C) = 25/51$. Then the
+probability of either event is
+\[
+{1 \over 2} \cdot {26 \over 51} + {1 \over 2} \cdot {25 \over 51} = {1
+\over 2}.
+\]
+
+\section{Exercise 4.1.17}
+
+\emph{Prove that if $A$ and $B$ are independent so are
+\begin{enumerate}[label=(\alph*)]
+\item $A$ and $\tilde B$.
+\item $\tilde A$ and $\tilde B$.
+\end{enumerate}}
+
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item\label{it:1} By the definition of independence
+  \begin{align*}
+    P(A \cap B)
+    &= P(A)P(B)\\
+    &= P(A)(1 - P(\tilde{B}))\\
+    &= P(A) - P(A)P(\tilde{B}).
+  \end{align*}
+  Therefore
+  \begin{align*}
+    P(A)P(\tilde{B})
+    &= P(A) - P(A \cap B).
+  \end{align*}
+
+  Note that also $P(A \cap \tilde{B}) = P(A) - P(A \cap B)$. Then
+  $P(A)P(\tilde{B}) = P(A \cap \tilde{B})$; thus $A$ and $\tilde{B}$
+  independent.
+
+\item By~\ref{it:1}, since $A$ and $\tilde{B}$ are independent,
+  $\tilde{A}$ and $\tilde{B}$ are independent.
+\end{enumerate}
+
+\section{Exercise 4.1.21}
+
+\emph{It is desired to find the probability that in a bridge deal each player
+receives an ace.  A student argues as follows.  It does not matter where the
+first ace goes.  The second ace must go to one of the other three players and
+this occurs with probability $3/4$.  Then the next must go to one of two, an
+event of probability $1/2$, and finally the last ace must go to the player who
+does not have an ace.  This occurs with probability $1/4$.  The probability that
+all these events occur is the product $(3/4)(1/2)(1/4) = 3/32$.  Is this
+argument correct?}
+
+\bigskip
+
+This argument is incorrect. The student errs when he or she assumes
+that the events are independent and thus the probability of their
+occurrence can be calculated as the product of their individual
+probabilities.
+
+\section{Exercise 4.1.37*}
+
+\emph{Given that $P(X = a) = r$, $P(\max(X,Y) = a) = s$, and
+  $P(\min(X,Y) = a) = t$, show that you can determine $u = P(Y = a)$
+  in terms of $r$,~$s$, and~$t$.}
+
+\bigskip
+
+Consider\marginnote{From
+  \url{http://www.math.hawaii.edu/~ralph/Classes/371/Answersodd-5-17-03.pdf}.}
+\begin{align*}
+  P(\max(X,Y) = a) = P(X = a, Y \leq a) + P(X \leq a, Y = a) - P(X =
+  a, Y = a).\\
+  P(\min(X,Y) = a) = P(X = a, Y < a) + P(X > a, Y = a) + P(X = a, Y = a).
+\end{align*}
+
+Then $P(\max(X,Y) = a) + P(\min(X,Y) = a) = P(X = a) + P(Y = a)$. Then
+$u = t + s - r$.
+
+\section{Exercise 4.1.49*}
+
+\emph{You are given two urns each containing two biased coins.  The coins in
+urn~I come up heads with probability~$p_1$, and the coins in urn~II come up
+heads with probability $p_2 \ne p_1$.  You are given a choice of (a)~choosing
+an urn at random and tossing the two coins in this urn or (b)~choosing one coin
+from each urn and tossing these two coins.  You win a prize if both coins turn
+up heads.  Show that you are better off selecting choice (a).}
+
+\bigskip
+
+The probability of winning via choice (a) is
+\[
+{1 \over 2}p_1^2 + {1 \over 2}p_2^2.
+\]
+
+Then
+\begin{align*}
+  {1 \over 2}p_1^2 + {1 \over 2}p_2^2
+  &= {1 \over 2}(p_1^2 + p_2^2)\\
+  &> {1 \over 2}(p_1 p_2 + p_1 p_2)\\
+  &= p_1 p_2.
+\end{align*}
+Then $P(\mathrm{(a)}) > P(\mathrm{(b)})$.
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

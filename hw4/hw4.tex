@@ -4,7 +4,6 @@
 \author{Anthony Brice}
 
 
-
 \begin{document}
 
 \maketitle
@@ -49,7 +48,7 @@ of success, and $q = 1 - p$.
   b(n,p,j) = \frac pq \left(\frac {n - j + 1}j \right) b(n,p,j - 1),
   \]
   for $j \ge 1$. Use this fact to determine the value or values of
-  $j$ which give $b(n,p,j)$ its greatest value.  \emph{Hint:} Consider
+  $j$ which give $b(n,p,j)$ its greatest value.  \emph{Hint}: Consider
   the successive ratios as $j$ increases.}
 
 \bigskip
@@ -103,13 +102,13 @@ $b(50,.5,\ceil{.7(50)})$.
   b(50,.5,\ceil{.7(50)})
   &= b(50,.5,35)\\
   &= {50 \choose 35}.5^{35}.5^{15}\\
-  &= .00199914.
+  &= .00199914
 \end{align*}
 
 \section{Exercise 12}
 
-\emph{A poker hand is a set of 5 cards randomly
-chosen from a deck of 52 cards.  Find the probability of a
+\emph{A poker hand is a set of $5$ cards randomly chosen from a deck of
+  52 cards.  Find the probability of a
   \begin{enumerate}[label=(\alph*)]
   \item royal flush (ten, jack, queen, king, ace in a single suit).
   \item straight flush (five in a sequence in a single suit, but not a
@@ -126,9 +125,62 @@ chosen from a deck of 52 cards.  Find the probability of a
 
 \bigskip
 
+Our general strategy is to divide the number of ways we can deal
+the given hand by the number of total hands possible, ${52 \choose 5}$.
+
 \begin{enumerate}[label=(\alph*)]
-\item
+\item Clearly of all the possible hands, only $4$ give the player a
+  royal flush. Then the probability is $4/{52 \choose 5} = .000154\%$.
+\item Note that ignoring suit, $9$ distinct hands give the player a
+  straight flush. Then the probability is
+  ${9 \choose 1}{4 \choose 1}/{52 \choose 5} = .00139\%$.
+\item Consider that we choose $1$ rank from $13$ for all suits, and
+  then another from the $12$ ranks left for any suit. Then the
+  probability is
+  \[
+  {{13 \choose 1} {4 \choose 4} \cdot {12 \choose 1} {4 \choose 1}
+    \over {52 \choose 5}} = .0240\%.
+  \]
+\item We choose $1$ rank from $13$ for $3$ suits, and another rank
+  from $12$ for $2$ suits. Then the probability is
+  \[
+  {{13 \choose 1} {4 \choose 3} \cdot {12 \choose 1} {4 \choose 2}
+    \over {52 \choose 5}} = .1441\%.
+  \]
+\item We will count any kind of flush and then subtract straight and
+  royal flushes. Consider that to deal a flush, we choose $5$ ranks
+  from $13$ for $1$ suit. Then the probability is
+  \[
+  {{13 \choose 5} {4 \choose 1} - {10 \choose 1} {4 \choose 1} \over
+    {52 \choose 5}} = .1965\%.
+  \]
+\item As above, we count any kind of straight, then subtract straight
+  and royal flushes. To deal a straight, we choose $1$ from $10$
+  hands, and all $5$ cards can be from any suit. Then the probability
+  is
+  \[
+  { {10 \choose 1} {4 \choose 1}^5 - {10 \choose 1} {4 \choose 1}
+    \over {52 \choose 5}} = .3925\%.
+  \]
 \end{enumerate}
+
+\section{Exercise 22}
+
+\emph{How many ways can six indistinguishable letters be put in three
+  mail boxes?  \emph{Hint}: One representation of this is given by a
+  sequence $|$LL$|$L$|$LLL$|$ where the $|$'s represent the partitions
+  for the boxes and the L's the letters.  Any possible way can be so
+  described.  Note that we need two bars at the ends and the remaining
+  two bars and the six L's can be put in any order.}
+
+\bigskip
+
+Using the formula provided in Exercise~23, $6$ indistinguishable
+letters can be put into $3$ mail boxes
+\begin{equation*}
+  {3 + 6 - 1 \choose 3 - 1 } = 28
+\end{equation*}
+different ways.
 
 \section{Exercise 33*}
 
@@ -141,15 +193,57 @@ chosen from a deck of 52 cards.  Find the probability of a
 
 \bigskip
 
-The number of different configurations of $2n$ balls from $4n$ is ${4n
-\choose 2n}$. We want to find the number of those that satisfy the
-condition of $n$ red balls and $n$ blue balls. Since the total balls
-are $1/2$ red and $1/2$ blue, surely half of ${4n \choose 2n}$
-satisfies our condition. Then our expression is
+We choose $n$ balls from $2n$ for red, and the same for blue. Then via
+Stirling's formula
+\begin{align*}
+  { {2n \choose n} \cdot {2n \choose n} \over {4n \choose 2n}}
+  &= { {\left( (2n)! \over {(n!)}^2 \right) }^2 \over {(4n)! \over
+    {(2n)!}^2}}\\
+  &= {\left( (2n)! \over {(n!)}^2 \right) }^2 \cdot { (2n)!^2 \over
+    (4n)! }\\
+  &= { (2n)! \over {(n!)}^2 } \cdot {(2n)! \over
+    {(n!)}^2 } \cdot { (2n)!^2 \over (4n)! }\\
+  &= { (2n)!^4 \over {(n!)}^4(4n)! }\\
+  &\sim {{ ( {(2n)}^{2n} e^{-2n} \sqrt{ 4 \pi n} ) }^4 \over {(n^n e^{-n}
+    \sqrt{2 \pi n})}^4 \cdot ( {(4n)}^{4n} e^{-4n} \sqrt{8 \pi
+    n})}\mathnote{By Stirling's formula.}\\
+  &= { 2^{4+8n} n^{2+8n} e^{-8n} \pi^2 \over (4 e^{4-n} n^{2+4n} \pi^2)
+    \cdot (2^{8 n+3/2} e^{-4 n} n^{4 n+1/2} \sqrt{\pi})}\\
+  &= { 2^{4+8n} n^{2+8n} e^{-8n} \pi^2 \over \pi^{5/2} 2^{8 n+7/2}
+    e^{-8 n} n^{8 n+5/2}}\\
+  &= \sqrt{2 \over \pi n}.
+\end{align*}
+
+When $n = 20$
 \[
-{{1 \over 2}{4n \choose 2n} \over {4n \choose 2n}}.
+{{40 \choose 20}^2 \over {80 \choose 40}} \sim \sqrt{2 \over 20 \pi} =
+{1 \over \sqrt{10 \pi}} \approx .178412.
 \]
 
+Via \textbf{BinomialProbabilities[$20,1/2,10,10,\mathrm{True}$]}, the
+exact solution is $.1761970520$.
+
+\section{Exercise 35*}
+
+\emph{Prove the following \emph{binomial identity}
+  \[
+  {2n \choose n} = \sum_{j=0}^n {n \choose j}^2.
+  \]
+  \emph{Hint}: Consider an urn with $n$ red balls and $n$ blue balls
+  inside. Show that each side of the equation equals the number of
+  ways to choose $n$ balls from the urn.}
+
+\bigskip
+
+\begin{proof}
+  Clearly the left side of the equation counts the number of ways to
+  choose $n$ from $2n$. Consider that
+  \[
+  \sum_{j=0}^n {n \choose j}^2 = \sum_{j=0}^n {n \choose j} {n \choose
+  n-j},
+  \]
+  which counts the same but splits $n$ into two groups. 
+\end{proof}
 \end{document}
 
 %%% Local Variables:

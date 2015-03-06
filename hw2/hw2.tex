@@ -69,6 +69,8 @@
 \usepackage{perpage}
 \MakePerPage{footnote}
 
+\usepackage{manfnt}
+
 \begin{document}
 
 \maketitle
@@ -158,18 +160,19 @@ Since $\log{2} \approx .69315$, my estimate is pretty good.
   \label{fig:exp}
 \end{marginfigure}
 
-We wrote the program \textbf{AvgWait}.  We chose to show two a
-histogram and a plot of the exponential function side-by-side because
-it appears the \lstinline$Areabargraph$ function provided by the
-author is deprecated and fixing it is beyond me. The output of
-\lstinline$AvgWait[10000]$ is given in Figures \ref{fig:barchart} and
-\ref{fig:exp}.
+We wrote the program \textbf{AvgWait}, shown in
+Listing~\ref{lst:2.1.9}.  We chose to show a histogram and a plot of
+the exponential function side-by-side because it appears the
+\lstinline$Areabargraph$ function provided by the author is deprecated
+and fixing it is beyond me. The output of \lstinline$AvgWait[10000]$
+is given in Figures \ref{fig:barchart} and \ref{fig:exp}.
 
 Since the figures are scaled similarly, one can see that the function
 is a very good fit for the graph.
 
 \begin{listingenv}
 \caption{The program \mbox{\textbf{AvgWait}}.}
+\label{lst:2.1.9}
 \begin{lstlisting}
 AvgWait[n_] :=
  Block[
@@ -243,7 +246,7 @@ AvgWait[n_] :=
   \label{fig:prob}
 \end{marginfigure}
 
-Let $X$ and $Y$ be our break points. Our pieces form a triangle if no
+Let $X$ and $Y$ our break points. Our pieces form a triangle if no
 piece is longer than any other. Thus, if $0<X<Y<1$, then the lengths
 of our line segments are $X$, $Y-X$, and $1-Y$. Then they must satisfy
 the conditions

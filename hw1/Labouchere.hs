@@ -39,5 +39,3 @@ main = do
     if all (\(x,y) -> null x && y == sum list) results
     then "All returned lists are empty and returned the sum of the list"
     else "The impossible has occurred"
-
-

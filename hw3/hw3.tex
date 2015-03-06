@@ -10,33 +10,63 @@
 \usepackage{booktabs} % book-quality tables
 \usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
+\usepackage{multirow} % ???
 \usepackage{lipsum}   % filler text
 \usepackage{fancyvrb} % extended verbatim environments
   \fvset{fontsize=\normalsize}% default font size for fancy-verbatim
                               % environments
+\usepackage{enumitem} % for fancy lists
 
+\usepackage[T1]{fontenc}
+%\usepackage[osf]{ebgaramond-maths} % for fancy serif
+%\usepackage[cmintegrals,cmbraces]{newtxmath}
+%\usepackage[osf,scale=0.9]{librecaslon}
+%\usepackage{ebgaramond}
+\usepackage{concrete}
+\usepackage[euler-digits,euler-hat-accent]{eulervm}
+%\usepackage[T1]{fontenc}
+
+%\usepackage{fraktur}
+
+%\usepackage[osf]{AlegreyaSans}
+%\renewcommand{\smallcaps}[1]{\sffamily #1}
+%\renewcommand*\oldstylenums[1]{{\AlegreyaSansOsF #1}}
+
+
+% Set up the spacing using fontspec features
+% \renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+% \renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name=Listing]{mylisting}
+
+\newenvironment{listingenv} {
+  \begin{mylisting}
+} {
+  \end{mylisting}
+}
 
 \usepackage{subcaption}
 \captionsetup{compatibility=false}
 
-\usepackage[scaled]{berasans}
-\usepackage[T1]{fontenc}
-\usepackage{listings,xcolor}
-%\lstloadlanguages{[5.2]Mathematica}
-\lstset{language=Mathematica}
+% \usepackage[scaled]{berasans}
+% \usepackage[T1]{fontenc}
+% \usepackage{listings,xcolor}
+% %\lstloadlanguages{[5.2]Mathematica}
+% \lstset{language=Mathematica}
 
-\lstset{basicstyle={\sffamily\footnotesize},
-  numbers=left,
-  numberstyle=\tiny\color{gray},
-  numbersep=5pt,
-  breaklines=true,
-  captionpos={t},
-  frame={lines},
-  rulecolor=\color{black},
-  framerule=0.5pt,
-  columns=flexible,
-  tabsize=2
-}
+% \lstset{basicstyle={\sffamily\footnotesize},
+%   numbers=left,
+%   numberstyle=\tiny\color{gray},
+%   numbersep=5pt,
+%   breaklines=true,
+%   captionpos={t},
+%   frame={lines},
+%   rulecolor=\color{black},
+%   framerule=0.5pt,
+%   columns=flexible,
+%   tabsize=2
+% }
 
 % Standardize command font styles and environments
 \newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
@@ -46,8 +76,8 @@
 \newcommand{\docpkg}[1]{\texttt{#1}}% package name
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
-\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command
-                                % specification environment
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}} % command
+% specification environment
 
 \newcommand{\e}[1]{\ensuremath{\times 10^{#1}}} % Macro for scientific
                                 % notation
@@ -59,19 +89,25 @@
 \usepackage{perpage}
 \MakePerPage{footnote}
 
+\usepackage{manfnt} % ???
+
 %\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textsf{#1}}%
+
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
 
 \begin{document}
 
 \maketitle
-\section{Section 3.1}
-\subsection{Exercise 6}
-\begin{description}
-\item \emph{In arranging people around a circular table, we take into
+
+\section{Exercise 3.1.6}
+
+\emph{In arranging people around a circular table, we take into
     account their seats relative to each other, not the actual
     position of any one person. Show that $n$ people can be arranged
     around a circular table in $(n - 1)!$ ways.}
-\end{description}
+
+\bigskip
 
 Consider that if we arranged $n$ people in a line, we would have $n!$
 ways to arrange them. Since the round table has no first or last
@@ -81,126 +117,152 @@ take $n!$ and divide it by $n$ because $n!$ counts each arrangement
 $n$ times. Then
 \begin{align*}
 \frac{n!}{n} &= \frac{n(n-1)!}{n}\\
-&= (n-1)! \, .
+&= (n-1)!.
 \end{align*}
 
-\subsection{Exercise 8}
-\begin{description}
-\item \emph{A finite set $\Omega$ has $n$ elements. Show that if we
+\section{Exercise 3.1.7}
+
+\emph{Five people get on an elevator that stops at five
+  floors. Assuming that each had an equal probability of going to any
+  one floor, find the probability that they all get off at different
+  floors.}
+
+\bigskip
+
+Start by counting the number of ways in which our success case can
+be satisfied. Consider that at the elevator's first stop, we choose
+$1$ from $5$ riders to leave, at the second we choose $1$ from $4$, and
+so on. Then the number of ways in which our riders can depart and
+satisfy our condition for success is $5!$.
+
+Consider that since each person has equal probability of getting off
+at any floor, the total number of ways the riders may depart counts a
+permutation with repetition, where our set is each floor and we want
+to find the number of $5$-tuples. Then that total is $5^5$. Then
+the probability that they all get off at different floors is
+$5! / 5^5$.
+
+\section{Exercise 3.1.8}
+
+\emph{A finite set $\Omega$ has $n$ elements. Show that if we
     count the empty set and $\Omega$ as subsets, there are $2^n$ subsets
     of $\Omega$.}
-\end{description}
+
+\bigskip
 
 Consider the construction of an arbitrary subset of $\Omega$. For each
 element in $\Omega$, there are two distinct events: that the element
 is included in our subset, or that it is not. Each event is
 necessarily independent, so the number of events is $2^n$.
 
-\subsection{Exercise 20}
-\begin{description}
-\item \emph{At a mathematical conference, ten participants are
-    randomly seated around a circular table for meals. Using
-    simulation, estimate the probability that no two people sit next
-    to each other at both lunch and dinner. Can you make an
-    intelligent conjecture for the case of $n$ participants when $n$
-    is large?}
-\end{description}
+\section{Exercise 3.1.20}
 
-To estimate the probability, we wrote the program
-\textbf{\mbox{MathConference}}%
-\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/MathConference.hs}}. From
-$50\,000$ trials, we estimated the probability to be about $.08$. By
+\emph{At a mathematical conference, ten participants are randomly
+  seated around a circular table for meals. Using simulation, estimate
+  the probability that no two people sit next to each other at both
+  lunch and dinner. Can you make an intelligent conjecture for the
+  case of $n$ participants when $n$ is large?}
+
+\bigskip
+
+To estimate the probability, we wrote the Haskell program
+\textbf{MathConference}%
+\footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/MathConference.hs}},
+which makes use of Martin Erwig's functional graph library to generate
+random graphs of the seating arrangements for lunch and dinner and
+then compares the edges in both graphs for equality. From $50\,000$
+trials, we estimated the probability to be about $.08$. By
 parameterizing the program on the number of participants $n$, we note
 that as $n$ increases so does our probability, but at a vastly reduced
 rate.
 
-\subsection{Exercise 22}
-\begin{description}
-\item \emph{Mr.~Wimply Dimple, one of London's most prestigious watch
-    makers, has come to Sherlock Holmes in a panic, having discovered
-    that someone has been producing and selling crude counterfeits of
-    his best selling watch. The $16$ counterfeits so far discovered
-    bear stamped numbers, all of which fall between $1$ and $56$, with
-    the largest stamped number equaling $56$, and Dimple is anxious to
-    know the extent of the forger's work. All present agree that it
-    seems reasonable to assume that the counterfeits thus far produced
-    bear consecutive numbers from $1$ to whatever the total number
-    is.}
+\section{Exercise 3.1.22*}
 
-  \emph{``Chin up, Dimple,'' opines Dr.~Watson. ``I shouldn't worry
-    overly much if I were you; the Maximum Likelihood Principle, which
-    estimates the total number as precisely that which gives the
-    highest probability for the series of numbers found, suggests that
-    we guess $56$ itself as the total. Thus, your forgers are not a
-    big operation, and we shall have them safely behind bars before
-    your business suffers significantly.''}
+\emph{Mr.~Wimply Dimple, one of London's most prestigious watch
+  makers, has come to Sherlock Holmes in a panic, having discovered
+  that someone has been producing and selling crude counterfeits of
+  his best selling watch. The $16$ counterfeits so far discovered bear
+  stamped numbers, all of which fall between $1$ and $56$, with the
+  largest stamped number equaling $56$, and Dimple is anxious to know
+  the extent of the forger's work. All present agree that it seems
+  reasonable to assume that the counterfeits thus far produced bear
+  consecutive numbers from $1$ to whatever the total number is.}
 
-  \emph{``Stuff, nonsense, and bother your fancy principles, Watson''
-    counters Holmes. ``Anyone can see that, of course, there must be
-    quite a few more than $56$ watches---why the odds of our having
-    discovered precisely the highest numbered watch made are laughably
-    negligible. A much better guess would be twice $56$.''}
+\emph{``Chin up, Dimple,'' opines Dr.~Watson. ``I shouldn't worry
+  overly much if I were you; the Maximum Likelihood Principle, which
+  estimates the total number as precisely that which gives the highest
+  probability for the series of numbers found, suggests that we guess
+  $56$ itself as the total. Thus, your forgers are not a big
+  operation, and we shall have them safely behind bars before your
+  business suffers significantly.''}
 
-  \begin{description}
-  \item[(a)] \emph{Show that Watson is correct that the Maximum
-      Likelihood Principle gives $56$.}
-  \item[(b)] \emph{Write a computer program to compare Holmes's and
-      Watson's guessing strategies as follows: fix a total of $N$ and
-      choose $16$ integers randomly between $1$ and $N$. Let $m$
-      denote the largest of these. Then Watson's guess for $N$ is $m$,
-      while Holmes's is $2m$. See which is closer to $N$. Repeat this
-      experiment (with $N$ still fixed) a hundred or more times, and
-      determine the proportion of times that each comes closer. Whose
-      seems to be a better strategy?}
-  \end{description}
-\end{description}
+\emph{``Stuff, nonsense, and bother your fancy principles, Watson''
+  counters Holmes. ``Anyone can see that, of course, there must be
+  quite a few more than $56$ watches---why the odds of our having
+  discovered precisely the highest numbered watch made are laughably
+  negligible. A much better guess would be twice $56$.''}
 
-\begin{description}
-\item[\rm (a)] Let $n$ be the true number of forged watches. Clearly
+\begin{enumerate}[label=\emph{(\alph*)}]
+\item \emph{Show that Watson is correct that the Maximum
+    Likelihood Principle gives $56$.}
+\item \emph{Write a computer program to compare Holmes's and Watson's
+    guessing strategies as follows: fix a total of $N$ and choose $16$
+    integers randomly between $1$ and $N$. Let $m$ denote the largest
+    of these. Then Watson's guess for $N$ is $m$, while Holmes's is
+    $2m$. See which is closer to $N$. Repeat this experiment (with $N$
+    still fixed) a hundred or more times, and determine the proportion
+    of times that each comes closer. Whose seems to be a better
+    strategy?}
+\end{enumerate}
+
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item Let $n$ be the true number of forged watches. Clearly
   $n \nless 56$. Since we have a uniformly random distribution, $1/n$
   is the likelihood that any watch numbered greater than or equal to
   $56$ is the maximum-numbered watch. Then for all $n$,
   $1/n$ is at its maximum when $n = 56$.
-\item[\rm (b)] We wrote the program
+\item We wrote the program
   \textbf{HolmesWatson}%
   \footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/HolmesWatson.hs}}
   to compare the strategies. With $N = 200$ and $100\,000$ iterations,
   we estimated the probability that Holmes's strategy would come
   closer to be $.00009$. Watson's is a far better strategy whenever
   the sample size is greater than $1$.
-\end{description}
+\end{enumerate}
 
-\subsection{Exercise 23}
-\begin{description}
-\item \emph{Barbara Smith is interviewing candidates to be her
-    secretary. As she interviews the candidates, she can determine the
-    relative rank of the candidates but not the true rank. Thus, if
-    there are six candidates and their true rank is $6, 1, 4, 2, 3,
-    5$, (where $1$ is best) then after she had interviewed the first
-    three candidates she would rank them $3, 1, 2$. As she interviews
-    each candidate, she must either accept or reject the candidate. If
-    she does not accept the candidate after the interview, the
-    candidate is lost to her. She wants to decide on a strategy for
-    deciding when to stop and accept a candidate that will maximize
-    the probability of getting the best candidate. Assume that there
-    are $n$ candidates and they arrive in a random rank order.}
-  \begin{description}
-  \item[(a)] \emph{What is the probability that Barbara gets the best
-      candidate if she interviews all of the candidates? What is it if
-      she chooses the first candidate?}
-  \item[(b)] \emph{Assume that Barbara decides to interview the first
-      half of the candidates and then continue interviewing them until
-      a candidate better than any seen so far. Show that she has a
-      better than $25$ percent chance of ending up with the best
-      candidate.}
-  \end{description}
-\end{description}
+\section{Exercise 3.1.23*}
 
-\begin{description}
-\item[\rm (a)] Since the best candidate has an equal probability of
+\emph{Barbara Smith is interviewing candidates to be her secretary. As
+  she interviews the candidates, she can determine the relative rank
+  of the candidates but not the true rank. Thus, if there are six
+  candidates and their true rank is $6, 1, 4, 2, 3, 5$, (where $1$ is
+  best) then after she had interviewed the first three candidates she
+  would rank them $3, 1, 2$. As she interviews each candidate, she
+  must either accept or reject the candidate. If she does not accept
+  the candidate after the interview, the candidate is lost to her. She
+  wants to decide on a strategy for deciding when to stop and accept a
+  candidate that will maximize the probability of getting the best
+  candidate. Assume that there are $n$ candidates and they arrive in a
+  random rank order.}
+\begin{enumerate}[label=\emph{(\alph*)}]
+\item \emph{What is the probability that Barbara gets the best
+    candidate if she interviews all of the candidates? What is it if
+    she chooses the first candidate?}
+\item \emph{Assume that Barbara decides to interview the first
+    half of the candidates and then continue interviewing them until a
+    candidate better than any seen so far. Show that she has a better
+    than $25$ percent chance of ending up with the best candidate.}
+\end{enumerate}
+
+\bigskip
+
+\begin{enumerate}[label= (\alph*)]
+\item Since the best candidate has an equal probability of
   appearing in any position in the ordering, the likelihood of either
   event is the same, $1/6$.
-\item[\rm (b)] Consider the case in which the second best candidate
+\item Consider the case in which the second best candidate
   appears in the first half of the interview and the best candidate
   appears in the second half. The probability of this event is $1/4$
   since the probability of either is $1/2$. Any event of this case
@@ -208,33 +270,34 @@ rate.
   least $1$ other event in which Barbara hires the best candidate
   (such as $6,5,4,1,2,3$), the probability that this strategy will
   yield the best candidate is greater than $1/4$.
-\end{description}
+\end{enumerate}
 
-\subsection{Exercise 24}
-\begin{description}
-\item \emph{For the task described in Exercise $23$, it can be shown
-    that the best strategy is to pass over the first $k-1$ candidates
-    where $k$ is the smallest integer for which}
-  \[\frac{1}{k} + \frac{1}{k+1} + \cdots + \frac{1}{n-1} \leq 1 \, .\]
-  \emph{Using this strategy the probability of getting the best
-    candidate is approximately $1/e = .368$. Write a program to
-    simulate Barbara Smith's interviewing if she uses this optimal
-    strategy, using $n=10$, and see if you can verify that the
-    probability of success is approximately $1/e$.}
-\end{description}
+\section{Exercise 3.1.24}
+
+\emph{For the task described in Exercise 3.1.23, it can be shown that
+  the best strategy is to pass over the first $k-1$ candidates where
+  $k$ is the smallest integer for which}
+\[\frac{1}{k} + \frac{1}{k+1} + \cdots + \frac{1}{n-1} \leq 1.\]
+\emph{Using this strategy the probability of getting the best
+  candidate is approximately $1/e = .368$. Write a program to simulate
+  Barbara Smith's interviewing if she uses this optimal strategy,
+  using $n=10$, and see if you can verify that the probability of
+  success is approximately $1/e$.}
+
+\bigskip
 
 We found that with $n = 10$ our simulation \textbf{InterviewOrder}%
 \footnote{\url{https://github.com/anthonybrice/MATH352/blob/master/hw3/InterviewOrder.hs}}
-consistently somewhat overestimated the likelihood of
-success. Over $200\,000$ iterations, we estimated a likelihood of
-success to be $.39774$. We found that as $n$ increased our estimation
-approached $1/e$, but we do not have an explanation for the discrepancy.
+consistently somewhat overestimated the likelihood of success. Over
+$200\,000$ iterations, we estimated a likelihood of success to be
+$.39774$. We found that as $n$ increased our estimation approached
+$1/e$, but we do not have an explanation for the discrepancy.
 
 \end{document}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
-%%% End: 
+%%% End:
 
 %  LocalWords:  Watson's
