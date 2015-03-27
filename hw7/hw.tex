@@ -1,0 +1,198 @@
+\documentclass{abrice}
+
+\title{Math 352: Homework 7}
+\author{Anthony Brice}
+
+\begin{document}
+\maketitle
+
+\section{Exercise 7*}
+
+\emph{Show that, if $X$ and $Y$ are random variables taking on only
+  two values each, and if $E(XY) = E(X)E(Y)$, then $X$ and $Y$ are
+  independent.}
+
+\bigskip
+
+\begin{proof}
+  foo
+\end{proof}
+
+\section{Exercise 8}
+
+\emph{A royal family has children until it has a boy or until it has
+  three children, whichever comes first. Assume that each child is a
+  boy with probability $1/2$. Find the expected number of boys in this
+  royal family and the expected number of girls.}
+
+\bigskip
+
+Consider that we have only $4$ possible events with easily calculable
+probabilities. The event that the family has only $1$ boy has
+probability $1/2$, that they have $1$ girl and $1$ boy has probability
+$1/4$, and the events of either $2$ girls and $1$ boy or of $3$ girls
+and no boy both have probability $1/8$. Then the expected number of
+boys is
+\[
+1 \cdot {1 \over 2} + 1 \cdot {1 \over 4} + 1 \cdot {1 \over 8} + 0
+\cdot {1 \over 8} = {7 \over 8},
+\]
+and the expected number of girls is
+\[
+0 \cdot {1 \over 2} + 1 \cdot {1 \over 4} + 2 \cdot {1 \over 8} + 3
+\cdot {1 \over 8} = {7 \over 8}.
+\]
+
+\section{Exercise 13}
+
+\emph{You have $80$ dollars and play the following game. An urn
+  contains two white balls and two black balls. You draw the balls out
+  one at a time without replacement until all the balls are gone. On
+  each draw, you bet half of your present fortune that you will draw a
+  white ball until all balls are gone. What is your expected fortune?}
+
+\bigskip
+
+Since we continue playing until all balls are gone, every possible game
+leaves us with $45$ dollars. Then our expected fortune is $45$ dollars.
+
+\section{Exercise 15}
+
+\emph{A box contains two gold balls and three silver balls. You are
+  allowed to choose successively balls from the box at random. You win
+  $1$ dollar each time you draw a gold ball and lose $1$ dollar each
+  time you draw a silver ball. After a draw, the ball is not
+  replaced. Show that, if you draw until you are ahead by $1$ dollar
+  or until there are no more gold balls, this is a favorable game.}
+
+\bigskip
+
+We want to show that with the given conditions the expected value of
+our game is greater than $0$. We calculate the value and
+probability of all games that satisfy our conditions in Table~\ref{ex15}.
+
+\begin{table}[h]
+  \centering
+  \label{ex15}
+  \begin{tabular}{lcc}
+    \toprule
+    Sequence & Value (\$) & Probability\\
+    \midrule
+    $G$ & $1$ & $2/5$\\
+    $S,G,G$ & $1$ & $1/10$\\
+    $S,S,G,G$ & $0$ & $1/10$\\
+    $S,G,S,G$ & $0$ & $1/10$\\
+    $S,S,S,G,G$ & $-1$ & $1/10$\\
+    $S,G,S,S,G$ & $-1$ & $1/10$\\
+    $S,S,G,S,G$ & $-1$ & $1/10$\\
+    \bottomrule
+  \end{tabular}
+  \caption{Let $G$ denote drawing a gold ball and $S$ denote drawing a
+  silver ball.}
+\end{table}
+
+Then the expected value is $1/5$ dollars, and thus the game is
+favorable.
+
+\section{Exercise 17}
+
+\emph{Let $X$ be the first time that a \emph{failure} occurs in an
+  infinite sequence of Bernoulli trails with probability $p$ for
+  success. Let $p_k = P(X=k)$ for $k = 1,2,\dots$ Show that $p_k =
+  p^{k-1} q$ where $q = 1 - p$. Show that $\sum_k p_k = 1$. Show that
+  $E(X) = 1/q$. What is the expected number of tosses of a coin
+  required to obtain the first tail?}
+
+\bigskip
+
+Consider that $p_k$ equals the probability of $k-1$ successes and $1$
+failure, which equals $p^{k-1} q$ where $q = 1 - p$.
+
+Consider
+\[
+\sum_{k=1}^{\infty} p_k = q \sum_{k=0}^{\infty} p^k = q {1 \over 1 -
+  p} = 1.
+\]
+
+Consider
+\[
+E(X) = q \sum_{k=1}^{\infty} k p^{k - 1} = {q \over {(1 - p)}^2} = {1
+  \over q}.
+\]
+
+Then the expected number of tosses to achieve the first tail is $2$.
+
+\section{Exercise 18}
+
+\emph{Exactly one of six similar keys opens a certain door. If you try
+the keys, one after another, what is the expected number of keys you
+will have to try before success?}
+
+\bigskip
+
+We have $6$ outcomes all occurring with the same probability. Then the
+expected value is
+\[
+{1 + 2 + 3 + 4 + 5 + 6 \over 6} = 3.5.
+\]
+
+\section{Exercise 25*}
+
+\emph{A deck of ESP cards consists of 20 cards each of two types: say
+  ten stars, ten circles (normally there are five types).  The deck is
+  shuffled and the cards turned up one at a time.  You, the alleged
+  percipient, are to name the symbol on each card \emph{before} it is
+  turned up.}
+
+\emph{Suppose that you are really just guessing at the cards.  If you
+  do not get to see each card after you have made your guess, then it
+  is easy to calculate the expected number of correct guesses, namely
+  ten.}
+
+\emph{If, on the other hand, you are guessing with information, that
+  is, if you see each card after your guess, then, of course, you
+  might expect to get a higher score.  This is indeed the case, but
+  calculating the correct expectation is no longer easy.}
+
+\emph{But it is easy to do a computer simulation of this guessing with
+  information, so we can get a good idea of the expectation by
+  simulation.  (This is similar to the way that skilled blackjack
+  players make blackjack into a favorable game by observing the cards
+  that have already been played.  See Exercise~29.)}
+
+\emph{
+  \begin{enumerate}[label=(\alph*)]
+  \item First, do a simulation of guessing without information,
+    repeating the experiment at least 1000 times.  Estimate the
+    expected number of correct answers and compare your result with
+    the theoretical expectation.
+  \item What is the best strategy for guessing with information?
+  \item Do a simulation of guessing with information, using the
+    strategy in (b).  Repeat the experiment at least 1000 times, and
+    estimate the expectation in this case.
+  \item Let $S$ be the number of stars and $C$ the number of circles
+    in the deck.  Let $h(S,C)$ be the expected winnings using the
+    optimal guessing strategy in (b).  Show that $h(S,C)$ satisfies
+    the recursion relation
+    \[ h(S,C) = \frac S{S + C} h(S - 1,C) + \frac C{S + C} h(S,C - 1)
+    + \frac {\max(S,C)}{S + C}\ ,
+    \]
+    and $h(0,0) = h(-1,0) = h(0,-1) = 0$.  Using this relation, write
+    a program to compute $h(S,C)$ and find $h(10,10)$.  Compare the
+    computed value of $h(10,10)$ with the result of your simulation in
+    (c).  For more about this exercise and Exercise~26 see Diaconis
+    and Graham.
+\end{enumerate}}
+
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item
+\end{enumerate}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: hw.tex
+%%% End:
