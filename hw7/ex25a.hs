@@ -2,12 +2,14 @@
 
 import Control.Monad (replicateM)
 import System.Random (newStdGen, StdGen, randoms)
+import System.Random.Shuffle (shuffle')
 import System.Environment (getArgs)
 
 -- | A 'trial' is a function that takes a random generator and returns a
 -- list of 20 random 0s and 1s.
 trial :: StdGen -> [Bool]
-trial g = take 20 $ randoms g
+trial = shuffle' list 20
+  where list = replicate 10 True ++ replicate 10 False
 
 -- | 'numSuccesses' takes two lists of 20 booleans and returns the
 -- number of values that are the same at each index.
