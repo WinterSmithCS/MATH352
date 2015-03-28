@@ -1,12 +1,12 @@
 -- ex25a.hs
 
 import Control.Monad (replicateM)
-import System.Random (newStdGen, StdGen, randoms)
+import System.Random (newStdGen, StdGen)
 import System.Random.Shuffle (shuffle')
 import System.Environment (getArgs)
 
 -- | A 'trial' is a function that takes a random generator and returns a
--- list of 20 random 0s and 1s.
+-- list of 10 True and 10 False in random order.
 trial :: StdGen -> [Bool]
 trial = shuffle' list 20
   where list = replicate 10 True ++ replicate 10 False
@@ -35,7 +35,7 @@ main = do
       values = zipWith numSuccesses guesses trials
       expectedValue = fromIntegral (sum values) / fromIntegral iters
 
-  putStrLn $ "We estimate the expected value to be " ++ show expectedValue
-    ++ "."
+  putStrLn $ "We estimate the expected value to be "
+    ++ show expectedValue ++ "."
 
 --  LocalWords: hs

@@ -15,7 +15,32 @@
 \bigskip
 
 \begin{proof}
-  foo
+  Choose \marginnote{From %
+    \url{http://www.dartmouth.edu/~chance/teaching_aids/books_articles/probability_book/Answersodd.pdf}.}%
+  $a,b,c,d$ such that
+  \[
+  U = {X + a \over b}\ \mathrm{and}\ V = {Y + c \over d}
+  \]
+  take only values $0$ and $1$. Consider that necessarily $E(UV) =
+  E(U)E(V)$. Then
+  \[
+  E(UV) = P(U=1, V=1) = E(U)E(V) = P(U=1)P(V=1),
+  \]
+  and
+  \begin{align*}
+    P(U=1, V=0)
+    &= P(U=1) - P(U=1, V=1)\\
+    &= P(U=1)(1 - P(V=1))\\
+    &= P(U=1)P(V=0).
+  \end{align*}
+
+  Similarly,
+  \begin{IEEEeqnarray*}{rCl}
+    P(U=0, V=1) & = & P(U=0)P(V=1)\\
+    P(U=0, V=0) & = & P(U=0)P(V=0).
+  \end{IEEEeqnarray*}
+
+  Then $U$ and $V$ are independent, therefore $X$ and $Y$ are independent.
 \end{proof}
 
 \section{Exercise 8}
@@ -187,12 +212,24 @@ expected value is
 \bigskip
 
 \begin{enumerate}[label=(\alph*)]
-\item
+\item My program estimated the value to be $10.004$, which is very
+  close to the theoretical
+  value. \marginnote{See
+    \url{https://github.com/anthonybrice/MATH352/blob/master/hw7/ex25a.hs}.}
+\item The best strategy when guessing with information is to always
+  guess the type that has appeared less or guess a random type if
+  the numbers of appearances are equal.
+\item My program estimated the value to $12.275$.\marginnote{See
+    \url{https://github.com/anthonybrice/MATH352/blob/master/hw7/ex25c.hs}.}
+\item My program calculated the expected value to be
+  $12.337731927515208$. \marginnote{See %
+    \url{https://github.com/anthonybrice/MATH352/blob/master/hw7/ex25d.hs}.}%
+  This is very close to my estimate in (c).
 \end{enumerate}
 
 \end{document}
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: hw.tex
+%%% TeX-master:
 %%% End:
