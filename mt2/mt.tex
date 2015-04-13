@@ -1,0 +1,93 @@
+\documentclass{abrice}
+
+\title{Math 352: Midterm 2}
+\author{Anthony Brice}
+
+\begin{document}
+\maketitle
+
+\section{Exercise 5}
+
+\emph{Suppose we have four chests each having two drawers. Chests $1$
+  and $2$ have a gold coin in one drawer and a silver coin in another
+  drawer. Chest 3 has two gold coins and Chest 4 has two silver
+  coins. A chest is selected at random and a drawer, chosen randomly
+  from the chest, is opened. It is found to contain a gold coin. Find
+  the probability that the other drawer has
+  \begin{enumerate}[label=(\alph*)]
+  \item a silver coin;
+  \item a gold coin.
+  \item What is the probability that Chest $1$ was selected?
+  \item What is the probability that Chest $4$ was selected?
+  \end{enumerate}
+}
+
+\bigskip
+
+\begin{enumerate}[label=(\alph*)]
+\item We want to find the probability that the other drawer contains a
+  silver coin given that the opened drawer contained a gold
+  coin. Since there are $4$ gold coins and $4$ silver coins, each with
+  an equal probability of being chosen, the probability of the given
+  event is $1/2$. Then we have left to find the probability of the
+  intersection of the events that the opened drawer contains a gold
+  coin and the other drawer contains a silver coin. Since there are
+  eight possible events when selecting a chest then drawer and only two
+  of those events involve choosing a chest and drawer that contains a
+  gold coin with a silver in the unopened drawer, the probability of
+  the intersection is $1/4$. Then the probability in question is
+  \[
+  { {1 \over 4} \over {1 \over 2}} = {1 \over 2}.
+  \]
+
+\item Since the given probability remains the same, we have left to
+  find the probability of the intersection of the events that the
+  opened drawer contains a gold coin and the other drawer contains a
+  gold coin. Since two events of the eight satisfy the conditions, the
+  probability of the intersection is $1/4$. Then the probability in
+  question is
+  \[
+  { {1 \over 4} \over {1 \over 2} } = {1 \over 2}.
+  \]
+
+\item We want to find the probability that chest $1$ was selected
+  given that the chosen drawer contained a gold coin. Our given
+  probability remains the same. We want to find the probability of the
+  intersection of the events that chest 1 was selected and a gold coin
+  was chosen. Since only one out of six events satisfies, the
+  probability of the intersection is $1/8$. Then the probability in
+  question is $1/4$.
+
+\item Since we are given that a gold coin was found, the probability
+  that chest $4$ was selected is certainly $0$.
+\end{enumerate}
+
+\section{Exercise 6}
+
+\emph{Suppose $X$ is a random variable with Poisson distribution with
+  parameter $\lambda$. Compute the expectation of ${(1 +
+  X)}^{-1}$. Hint: What is the Taylor expansion of $e^x$?
+}
+
+\bigskip
+
+\begin{align*}
+  E\left( {(1+X)}^{-1} \right)
+  &= \sum_{x=0}^{\infty} {1 \over 1 + x} \cdot { \lambda^x
+    e^{-\lambda} \over x! }\\
+  &= e^{-\lambda} \sum_{x=0}^{\infty} {1 \over 1 + x} \cdot {
+    \lambda^x \over x!}\\
+  &= {1 \over \lambda} e^{-\lambda} \sum_{x=0}^{\infty} { \lambda
+    \over 1 + x} \cdot { \lambda^x \over x! }\\
+  &= {1 \over \lambda} e^{-\lambda} \sum_{x=0}^{\infty} {
+    \lambda^{x+1} \over (x+1)! }\\
+  &= {1 \over \lambda} \cdot e^{-\lambda} \cdot e^{\lambda}
+    \mathnote{By the Taylor expansion of $e^x$.}\\
+  &= {1 \over \lambda}.
+\end{align*}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
